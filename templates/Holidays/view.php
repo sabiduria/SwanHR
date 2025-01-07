@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Holiday'), ['action' => 'edit', $holiday->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Holiday'), ['action' => 'delete', $holiday->id], ['confirm' => __('Are you sure you want to delete # {0}?', $holiday->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Holidays'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Holiday'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="holidays view content">
             <h3><?= h($holiday->id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('Createdby') ?></th>
                     <td><?= h($holiday->createdby) ?></td>

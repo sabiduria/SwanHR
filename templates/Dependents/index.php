@@ -4,11 +4,11 @@
  * @var iterable<\App\Model\Entity\Dependent> $dependents
  */
 ?>
-<div class="dependents index content">
-    <?= $this->Html->link(__('New Dependent'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+<div class="mt-3">
+    <?= $this->Html->link(__('New Dependent'), ['action' => 'add'], ['class' => 'btn btn-success btn-sm']) ?>
     <h3><?= __('Dependents') ?></h3>
     <div class="table-responsive">
-        <table>
+        <table class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" id="datatable-buttons">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -42,23 +42,13 @@
                     <td><?= h($dependent->modifiedby) ?></td>
                     <td><?= h($dependent->deleted) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $dependent->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $dependent->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $dependent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dependent->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $dependent->id], ['class' => 'btn btn-success btn-sm']) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $dependent->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $dependent->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>

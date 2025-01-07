@@ -7,39 +7,37 @@
  * @var string[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $leave->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $leave->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Leaves'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($leave) ?>
+        <div class="row gy-2">
+            <h3><?= __('Edit Leave') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('leavestype_id', ['options' => $leavestypes, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('status_id', ['options' => $statuses, 'empty' => true, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('user_id', ['options' => $users, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('startdate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('enddate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('reason', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('approvedby', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('approveddate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="leaves form content">
-            <?= $this->Form->create($leave) ?>
-            <fieldset>
-                <legend><?= __('Edit Leave') ?></legend>
-                <?php
-                    echo $this->Form->control('leavestype_id', ['options' => $leavestypes]);
-                    echo $this->Form->control('status_id', ['options' => $statuses, 'empty' => true]);
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('startdate', ['empty' => true]);
-                    echo $this->Form->control('enddate', ['empty' => true]);
-                    echo $this->Form->control('reason');
-                    echo $this->Form->control('approvedby');
-                    echo $this->Form->control('approveddate', ['empty' => true]);
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

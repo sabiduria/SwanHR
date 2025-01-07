@@ -4,32 +4,16 @@
  * @var \App\Model\Entity\Occupation $occupation
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $occupation->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $occupation->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Occupations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($occupation) ?>
+        <div class="row gy-2">
+            <h3><?= __('Edit Occupation') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('name', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="occupations form content">
-            <?= $this->Form->create($occupation) ?>
-            <fieldset>
-                <legend><?= __('Edit Occupation') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

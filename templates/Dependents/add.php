@@ -6,32 +6,31 @@
  * @var \Cake\Collection\CollectionInterface|string[] $relationships
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Dependents'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($dependent) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add Dependent') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('user_id', ['options' => $users, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('relationship_id', ['options' => $relationships, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('fistname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('secondname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('lastname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('gender', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="dependents form content">
-            <?= $this->Form->create($dependent) ?>
-            <fieldset>
-                <legend><?= __('Add Dependent') ?></legend>
-                <?php
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('relationship_id', ['options' => $relationships]);
-                    echo $this->Form->control('fistname');
-                    echo $this->Form->control('secondname');
-                    echo $this->Form->control('lastname');
-                    echo $this->Form->control('gender');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

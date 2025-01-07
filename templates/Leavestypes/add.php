@@ -4,28 +4,19 @@
  * @var \App\Model\Entity\Leavestype $leavestype
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Leavestypes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($leavestype) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add Leavestype') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('name', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('maxdaysperyear', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="leavestypes form content">
-            <?= $this->Form->create($leavestype) ?>
-            <fieldset>
-                <legend><?= __('Add Leavestype') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('maxdaysperyear');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

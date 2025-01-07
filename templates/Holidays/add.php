@@ -4,28 +4,19 @@
  * @var \App\Model\Entity\Holiday $holiday
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Holidays'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($holiday) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add Holiday') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('holidaydate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('description', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="holidays form content">
-            <?= $this->Form->create($holiday) ?>
-            <fieldset>
-                <legend><?= __('Add Holiday') ?></legend>
-                <?php
-                    echo $this->Form->control('holidaydate', ['empty' => true]);
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

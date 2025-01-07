@@ -4,28 +4,19 @@
  * @var \App\Model\Entity\Attendancestype $attendancestype
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Attendancestypes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($attendancestype) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add Attendancestype') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('name', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('penality', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="attendancestypes form content">
-            <?= $this->Form->create($attendancestype) ?>
-            <fieldset>
-                <legend><?= __('Add Attendancestype') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('penality');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

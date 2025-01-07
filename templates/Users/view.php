@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="users view content">
             <h3><?= h($user->id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('Firstname') ?></th>
                     <td><?= h($user->firstname) ?></td>
@@ -135,7 +126,7 @@
                 <h4><?= __('Related Attendances') ?></h4>
                 <?php if (!empty($user->attendances)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -164,9 +155,9 @@
                             <td><?= h($attendance->modifiedby) ?></td>
                             <td><?= h($attendance->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['confirm' => __('Are you sure you want to delete # {0}?', $attendance->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -178,7 +169,7 @@
                 <h4><?= __('Related Dependents') ?></h4>
                 <?php if (!empty($user->dependents)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -209,9 +200,9 @@
                             <td><?= h($dependent->modifiedby) ?></td>
                             <td><?= h($dependent->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Dependents', 'action' => 'view', $dependent->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Dependents', 'action' => 'edit', $dependent->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dependents', 'action' => 'delete', $dependent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dependent->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Dependents', 'action' => 'view', $dependent->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Dependents', 'action' => 'edit', $dependent->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dependents', 'action' => 'delete', $dependent->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -223,7 +214,7 @@
                 <h4><?= __('Related Leaves') ?></h4>
                 <?php if (!empty($user->leaves)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Leavestype Id') ?></th>
@@ -258,9 +249,9 @@
                             <td><?= h($leave->modifiedby) ?></td>
                             <td><?= h($leave->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leaves', 'action' => 'edit', $leave->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leaves', 'action' => 'delete', $leave->id], ['confirm' => __('Are you sure you want to delete # {0}?', $leave->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leaves', 'action' => 'edit', $leave->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leaves', 'action' => 'delete', $leave->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -272,7 +263,7 @@
                 <h4><?= __('Related Leavesbalances') ?></h4>
                 <?php if (!empty($user->leavesbalances)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -299,9 +290,9 @@
                             <td><?= h($leavesbalance->modifiedby) ?></td>
                             <td><?= h($leavesbalance->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Leavesbalances', 'action' => 'view', $leavesbalance->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leavesbalances', 'action' => 'edit', $leavesbalance->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leavesbalances', 'action' => 'delete', $leavesbalance->id], ['confirm' => __('Are you sure you want to delete # {0}?', $leavesbalance->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Leavesbalances', 'action' => 'view', $leavesbalance->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leavesbalances', 'action' => 'edit', $leavesbalance->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leavesbalances', 'action' => 'delete', $leavesbalance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -313,7 +304,7 @@
                 <h4><?= __('Related Proexperiences') ?></h4>
                 <?php if (!empty($user->proexperiences)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -344,9 +335,9 @@
                             <td><?= h($proexperience->modifiedby) ?></td>
                             <td><?= h($proexperience->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Proexperiences', 'action' => 'view', $proexperience->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Proexperiences', 'action' => 'edit', $proexperience->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Proexperiences', 'action' => 'delete', $proexperience->id], ['confirm' => __('Are you sure you want to delete # {0}?', $proexperience->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Proexperiences', 'action' => 'view', $proexperience->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Proexperiences', 'action' => 'edit', $proexperience->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Proexperiences', 'action' => 'delete', $proexperience->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

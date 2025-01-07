@@ -5,49 +5,82 @@
  * @var \Cake\Collection\CollectionInterface|string[] $occupations
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($user) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add User') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('firstname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('secondname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('lastname', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('occupation_id', ['options' => $occupations, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('maritalstatus', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('email', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('phone1', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('phone2', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('birthplace', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('birthdate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('gender', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('nationality', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('typeofidentitypiece', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('identitypiecenumber', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('address_number', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('address_avenue', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('address_district', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('address_municipality', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('education_level', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('education_option', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('affectation_date', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('username', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('password', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Add User') ?></legend>
-                <?php
-                    echo $this->Form->control('firstname');
-                    echo $this->Form->control('secondname');
-                    echo $this->Form->control('lastname');
-                    echo $this->Form->control('occupation_id', ['options' => $occupations]);
-                    echo $this->Form->control('maritalstatus');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('phone1');
-                    echo $this->Form->control('phone2');
-                    echo $this->Form->control('birthplace');
-                    echo $this->Form->control('birthdate', ['empty' => true]);
-                    echo $this->Form->control('gender');
-                    echo $this->Form->control('nationality');
-                    echo $this->Form->control('typeofidentitypiece');
-                    echo $this->Form->control('identitypiecenumber');
-                    echo $this->Form->control('address_number');
-                    echo $this->Form->control('address_avenue');
-                    echo $this->Form->control('address_district');
-                    echo $this->Form->control('address_municipality');
-                    echo $this->Form->control('education_level');
-                    echo $this->Form->control('education_option');
-                    echo $this->Form->control('affectation_date', ['empty' => true]);
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

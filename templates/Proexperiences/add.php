@@ -5,32 +5,31 @@
  * @var \Cake\Collection\CollectionInterface|string[] $users
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Proexperiences'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="mt-3">
+    <?= $this->Form->create($proexperience) ?>
+        <div class="row gy-2">
+            <h3><?= __('Add Proexperience') ?></h3>
+            <div class="col-xl-12">
+                <?= $this->Form->control('user_id', ['options' => $users, 'class'=>'form-select select2']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('startdate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('endate', ['empty' => true, 'class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('institution', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('occupation', ['class'=>'form-control']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('comments', ['class'=>'form-control']); ?>
+            </div>
         </div>
-    </aside>
-    <div class="column column-80">
-        <div class="proexperiences form content">
-            <?= $this->Form->create($proexperience) ?>
-            <fieldset>
-                <legend><?= __('Add Proexperience') ?></legend>
-                <?php
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('startdate', ['empty' => true]);
-                    echo $this->Form->control('endate', ['empty' => true]);
-                    echo $this->Form->control('institution');
-                    echo $this->Form->control('occupation');
-                    echo $this->Form->control('comments');
-                    echo $this->Form->control('createdby');
-                    echo $this->Form->control('modifiedby');
-                    echo $this->Form->control('deleted');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mt-3 mb-3">
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
         </div>
-    </div>
+    <?= $this->Form->end() ?>
 </div>

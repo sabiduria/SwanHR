@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Attendancestype'), ['action' => 'edit', $attendancestype->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Attendancestype'), ['action' => 'delete', $attendancestype->id], ['confirm' => __('Are you sure you want to delete # {0}?', $attendancestype->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Attendancestypes'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Attendancestype'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="attendancestypes view content">
             <h3><?= h($attendancestype->name) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('Name') ?></th>
                     <td><?= h($attendancestype->name) ?></td>
@@ -55,7 +46,7 @@
                 <h4><?= __('Related Attendances') ?></h4>
                 <?php if (!empty($attendancestype->attendances)) : ?>
                 <div class="table-responsive">
-                    <table>
+                    <table class="table">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -84,9 +75,9 @@
                             <td><?= h($attendance->modifiedby) ?></td>
                             <td><?= h($attendance->deleted) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['confirm' => __('Are you sure you want to delete # {0}?', $attendance->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

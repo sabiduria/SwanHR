@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Leavesbalance'), ['action' => 'edit', $leavesbalance->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Leavesbalance'), ['action' => 'delete', $leavesbalance->id], ['confirm' => __('Are you sure you want to delete # {0}?', $leavesbalance->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Leavesbalances'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Leavesbalance'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="leavesbalances view content">
             <h3><?= h($leavesbalance->id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('User') ?></th>
                     <td><?= $leavesbalance->hasValue('user') ? $this->Html->link($leavesbalance->user->id, ['controller' => 'Users', 'action' => 'view', $leavesbalance->user->id]) : '' ?></td>

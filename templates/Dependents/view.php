@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Dependent'), ['action' => 'edit', $dependent->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Dependent'), ['action' => 'delete', $dependent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dependent->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Dependents'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Dependent'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="dependents view content">
             <h3><?= h($dependent->id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('User') ?></th>
                     <td><?= $dependent->hasValue('user') ? $this->Html->link($dependent->user->id, ['controller' => 'Users', 'action' => 'view', $dependent->user->id]) : '' ?></td>

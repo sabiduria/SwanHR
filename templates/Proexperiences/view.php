@@ -5,19 +5,10 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Proexperience'), ['action' => 'edit', $proexperience->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Proexperience'), ['action' => 'delete', $proexperience->id], ['confirm' => __('Are you sure you want to delete # {0}?', $proexperience->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Proexperiences'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Proexperience'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column column-80">
         <div class="proexperiences view content">
             <h3><?= h($proexperience->id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('User') ?></th>
                     <td><?= $proexperience->hasValue('user') ? $this->Html->link($proexperience->user->id, ['controller' => 'Users', 'action' => 'view', $proexperience->user->id]) : '' ?></td>
