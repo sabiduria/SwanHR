@@ -17,7 +17,7 @@ class AttendancestypesController extends AppController
      */
     public function index()
     {
-        $query = $this->Attendancestypes->find();
+        $query = $this->Attendancestypes->find()->where(['attendancestypes.deleted' => 0]);
         $attendancestypes = $this->paginate($query);
 
         $this->set(compact('attendancestypes'));
@@ -43,9 +43,15 @@ class AttendancestypesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $attendancestype = $this->Attendancestypes->newEmptyEntity();
         if ($this->request->is('post')) {
             $attendancestype = $this->Attendancestypes->patchEntity($attendancestype, $this->request->getData());
+
+            $attendancestype->createdby = $session->read('Auth.Username');
+            $attendancestype->modifiedby = $session->read('Auth.Username');
+            $attendancestype->deleted = 0;
+
             if ($this->Attendancestypes->save($attendancestype)) {
                 $this->Flash->success(__('The attendancestype has been saved.'));
 
@@ -65,9 +71,13 @@ class AttendancestypesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $attendancestype = $this->Attendancestypes->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $attendancestype = $this->Attendancestypes->patchEntity($attendancestype, $this->request->getData());
+
+            $attendancestype->modifiedby = $session->read('Auth.Username');
+
             if ($this->Attendancestypes->save($attendancestype)) {
                 $this->Flash->success(__('The attendancestype has been saved.'));
 
@@ -87,9 +97,14 @@ class AttendancestypesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $attendancestype = $this->Attendancestypes->get($id);
-        if ($this->Attendancestypes->delete($attendancestype)) {
+
+        $attendancestype->modifiedby = $session->read('Auth.Username');
+        $attendancestype->deleted = 0;
+
+        if ($this->Attendancestypes->save($attendancestype)) {
             $this->Flash->success(__('The attendancestype has been deleted.'));
         } else {
             $this->Flash->error(__('The attendancestype could not be deleted. Please, try again.'));

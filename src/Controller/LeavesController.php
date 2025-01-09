@@ -17,7 +17,7 @@ class LeavesController extends AppController
      */
     public function index()
     {
-        $query = $this->Leaves->find()
+        $query = $this->Leaves->find()->where(['leaves.deleted' => 0])
             ->contain(['Leavestypes', 'Statuses', 'Users']);
         $leaves = $this->paginate($query);
 
@@ -44,9 +44,15 @@ class LeavesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $leave = $this->Leaves->newEmptyEntity();
         if ($this->request->is('post')) {
             $leave = $this->Leaves->patchEntity($leave, $this->request->getData());
+
+            $leave->createdby = $session->read('Auth.Username');
+            $leave->modifiedby = $session->read('Auth.Username');
+            $leave->deleted = 0;
+
             if ($this->Leaves->save($leave)) {
                 $this->Flash->success(__('The leave has been saved.'));
 
@@ -69,9 +75,13 @@ class LeavesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $leave = $this->Leaves->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $leave = $this->Leaves->patchEntity($leave, $this->request->getData());
+
+            $leave->modifiedby = $session->read('Auth.Username');
+
             if ($this->Leaves->save($leave)) {
                 $this->Flash->success(__('The leave has been saved.'));
 
@@ -94,9 +104,14 @@ class LeavesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $leave = $this->Leaves->get($id);
-        if ($this->Leaves->delete($leave)) {
+
+        $leave->modifiedby = $session->read('Auth.Username');
+        $leave->deleted = 0;
+
+        if ($this->Leaves->save($leave)) {
             $this->Flash->success(__('The leave has been deleted.'));
         } else {
             $this->Flash->error(__('The leave could not be deleted. Please, try again.'));

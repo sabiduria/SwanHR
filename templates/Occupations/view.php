@@ -42,7 +42,7 @@
                 <h4><?= __('Related Users') ?></h4>
                 <?php if (!empty($occupation->users)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Firstname') ?></th>

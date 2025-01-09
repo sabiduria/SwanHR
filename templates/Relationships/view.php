@@ -42,7 +42,7 @@
                 <h4><?= __('Related Dependents') ?></h4>
                 <?php if (!empty($relationship->dependents)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>

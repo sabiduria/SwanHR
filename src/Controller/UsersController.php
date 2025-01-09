@@ -17,7 +17,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $query = $this->Users->find()
+        $query = $this->Users->find()->where(['users.deleted' => 0])
             ->contain(['Occupations']);
         $users = $this->paginate($query);
 
@@ -44,9 +44,15 @@ class UsersController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            $user->createdby = $session->read('Auth.Username');
+            $user->modifiedby = $session->read('Auth.Username');
+            $user->deleted = 0;
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -67,9 +73,13 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $user = $this->Users->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            $user->modifiedby = $session->read('Auth.Username');
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -90,9 +100,14 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
+
+        $user->modifiedby = $session->read('Auth.Username');
+        $user->deleted = 0;
+
+        if ($this->Users->save($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));

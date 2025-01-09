@@ -17,7 +17,7 @@ class DependentsController extends AppController
      */
     public function index()
     {
-        $query = $this->Dependents->find()
+        $query = $this->Dependents->find()->where(['dependents.deleted' => 0])
             ->contain(['Users', 'Relationships']);
         $dependents = $this->paginate($query);
 
@@ -44,9 +44,15 @@ class DependentsController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $dependent = $this->Dependents->newEmptyEntity();
         if ($this->request->is('post')) {
             $dependent = $this->Dependents->patchEntity($dependent, $this->request->getData());
+
+            $dependent->createdby = $session->read('Auth.Username');
+            $dependent->modifiedby = $session->read('Auth.Username');
+            $dependent->deleted = 0;
+
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
 
@@ -68,9 +74,13 @@ class DependentsController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $dependent = $this->Dependents->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dependent = $this->Dependents->patchEntity($dependent, $this->request->getData());
+
+            $dependent->modifiedby = $session->read('Auth.Username');
+
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
 
@@ -92,9 +102,14 @@ class DependentsController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $dependent = $this->Dependents->get($id);
-        if ($this->Dependents->delete($dependent)) {
+
+        $dependent->modifiedby = $session->read('Auth.Username');
+        $dependent->deleted = 0;
+
+        if ($this->Dependents->save($dependent)) {
             $this->Flash->success(__('The dependent has been deleted.'));
         } else {
             $this->Flash->error(__('The dependent could not be deleted. Please, try again.'));

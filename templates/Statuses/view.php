@@ -46,7 +46,7 @@
                 <h4><?= __('Related Leaves') ?></h4>
                 <?php if (!empty($status->leaves)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Leavestype Id') ?></th>

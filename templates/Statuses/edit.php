@@ -7,12 +7,11 @@
 <div class="mt-3">
     <?= $this->Form->create($status) ?>
         <div class="row gy-2">
-            <h3><?= __('Edit Status') ?></h3>
             <div class="col-xl-12">
-                <?= $this->Form->control('name', ['class'=>'form-control']); ?>
+                <?= $this->Form->control('name', ['class' => 'form-control', 'label' => 'name']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('tables', ['class'=>'form-control']); ?>
+                <?= $this->Form->control('tables', ['class' => 'form-control', 'label' => 'tables']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">

@@ -17,7 +17,7 @@ class RelationshipsController extends AppController
      */
     public function index()
     {
-        $query = $this->Relationships->find();
+        $query = $this->Relationships->find()->where(['relationships.deleted' => 0]);
         $relationships = $this->paginate($query);
 
         $this->set(compact('relationships'));
@@ -43,9 +43,15 @@ class RelationshipsController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $relationship = $this->Relationships->newEmptyEntity();
         if ($this->request->is('post')) {
             $relationship = $this->Relationships->patchEntity($relationship, $this->request->getData());
+
+            $relationship->createdby = $session->read('Auth.Username');
+            $relationship->modifiedby = $session->read('Auth.Username');
+            $relationship->deleted = 0;
+
             if ($this->Relationships->save($relationship)) {
                 $this->Flash->success(__('The relationship has been saved.'));
 
@@ -65,9 +71,13 @@ class RelationshipsController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $relationship = $this->Relationships->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $relationship = $this->Relationships->patchEntity($relationship, $this->request->getData());
+
+            $relationship->modifiedby = $session->read('Auth.Username');
+
             if ($this->Relationships->save($relationship)) {
                 $this->Flash->success(__('The relationship has been saved.'));
 
@@ -87,9 +97,14 @@ class RelationshipsController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $relationship = $this->Relationships->get($id);
-        if ($this->Relationships->delete($relationship)) {
+
+        $relationship->modifiedby = $session->read('Auth.Username');
+        $relationship->deleted = 0;
+
+        if ($this->Relationships->save($relationship)) {
             $this->Flash->success(__('The relationship has been deleted.'));
         } else {
             $this->Flash->error(__('The relationship could not be deleted. Please, try again.'));

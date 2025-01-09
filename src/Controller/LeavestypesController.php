@@ -17,7 +17,7 @@ class LeavestypesController extends AppController
      */
     public function index()
     {
-        $query = $this->Leavestypes->find();
+        $query = $this->Leavestypes->find()->where(['leavestypes.deleted' => 0]);
         $leavestypes = $this->paginate($query);
 
         $this->set(compact('leavestypes'));
@@ -43,9 +43,15 @@ class LeavestypesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $leavestype = $this->Leavestypes->newEmptyEntity();
         if ($this->request->is('post')) {
             $leavestype = $this->Leavestypes->patchEntity($leavestype, $this->request->getData());
+
+            $leavestype->createdby = $session->read('Auth.Username');
+            $leavestype->modifiedby = $session->read('Auth.Username');
+            $leavestype->deleted = 0;
+
             if ($this->Leavestypes->save($leavestype)) {
                 $this->Flash->success(__('The leavestype has been saved.'));
 
@@ -65,9 +71,13 @@ class LeavestypesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $leavestype = $this->Leavestypes->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $leavestype = $this->Leavestypes->patchEntity($leavestype, $this->request->getData());
+
+            $leavestype->modifiedby = $session->read('Auth.Username');
+
             if ($this->Leavestypes->save($leavestype)) {
                 $this->Flash->success(__('The leavestype has been saved.'));
 
@@ -87,9 +97,14 @@ class LeavestypesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $leavestype = $this->Leavestypes->get($id);
-        if ($this->Leavestypes->delete($leavestype)) {
+
+        $leavestype->modifiedby = $session->read('Auth.Username');
+        $leavestype->deleted = 0;
+
+        if ($this->Leavestypes->save($leavestype)) {
             $this->Flash->success(__('The leavestype has been deleted.'));
         } else {
             $this->Flash->error(__('The leavestype could not be deleted. Please, try again.'));

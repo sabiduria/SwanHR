@@ -17,7 +17,7 @@ class StatusesController extends AppController
      */
     public function index()
     {
-        $query = $this->Statuses->find();
+        $query = $this->Statuses->find()->where(['statuses.deleted' => 0]);
         $statuses = $this->paginate($query);
 
         $this->set(compact('statuses'));
@@ -43,9 +43,15 @@ class StatusesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $status = $this->Statuses->newEmptyEntity();
         if ($this->request->is('post')) {
             $status = $this->Statuses->patchEntity($status, $this->request->getData());
+
+            $status->createdby = $session->read('Auth.Username');
+            $status->modifiedby = $session->read('Auth.Username');
+            $status->deleted = 0;
+
             if ($this->Statuses->save($status)) {
                 $this->Flash->success(__('The status has been saved.'));
 
@@ -65,9 +71,13 @@ class StatusesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $status = $this->Statuses->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $status = $this->Statuses->patchEntity($status, $this->request->getData());
+
+            $status->modifiedby = $session->read('Auth.Username');
+
             if ($this->Statuses->save($status)) {
                 $this->Flash->success(__('The status has been saved.'));
 
@@ -87,9 +97,14 @@ class StatusesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $status = $this->Statuses->get($id);
-        if ($this->Statuses->delete($status)) {
+
+        $status->modifiedby = $session->read('Auth.Username');
+        $status->deleted = 0;
+
+        if ($this->Statuses->save($status)) {
             $this->Flash->success(__('The status has been deleted.'));
         } else {
             $this->Flash->error(__('The status could not be deleted. Please, try again.'));

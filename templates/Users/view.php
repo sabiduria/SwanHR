@@ -126,7 +126,7 @@
                 <h4><?= __('Related Attendances') ?></h4>
                 <?php if (!empty($user->attendances)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -169,7 +169,7 @@
                 <h4><?= __('Related Dependents') ?></h4>
                 <?php if (!empty($user->dependents)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -214,7 +214,7 @@
                 <h4><?= __('Related Leaves') ?></h4>
                 <?php if (!empty($user->leaves)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Leavestype Id') ?></th>
@@ -263,7 +263,7 @@
                 <h4><?= __('Related Leavesbalances') ?></h4>
                 <?php if (!empty($user->leavesbalances)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
@@ -304,7 +304,7 @@
                 <h4><?= __('Related Proexperiences') ?></h4>
                 <?php if (!empty($user->proexperiences)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>

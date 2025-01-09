@@ -17,7 +17,7 @@ class LeavesbalancesController extends AppController
      */
     public function index()
     {
-        $query = $this->Leavesbalances->find()
+        $query = $this->Leavesbalances->find()->where(['leavesbalances.deleted' => 0])
             ->contain(['Users', 'Leavestypes']);
         $leavesbalances = $this->paginate($query);
 
@@ -44,9 +44,15 @@ class LeavesbalancesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $leavesbalance = $this->Leavesbalances->newEmptyEntity();
         if ($this->request->is('post')) {
             $leavesbalance = $this->Leavesbalances->patchEntity($leavesbalance, $this->request->getData());
+
+            $leavesbalance->createdby = $session->read('Auth.Username');
+            $leavesbalance->modifiedby = $session->read('Auth.Username');
+            $leavesbalance->deleted = 0;
+
             if ($this->Leavesbalances->save($leavesbalance)) {
                 $this->Flash->success(__('The leavesbalance has been saved.'));
 
@@ -68,9 +74,13 @@ class LeavesbalancesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $leavesbalance = $this->Leavesbalances->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $leavesbalance = $this->Leavesbalances->patchEntity($leavesbalance, $this->request->getData());
+
+            $leavesbalance->modifiedby = $session->read('Auth.Username');
+
             if ($this->Leavesbalances->save($leavesbalance)) {
                 $this->Flash->success(__('The leavesbalance has been saved.'));
 
@@ -92,9 +102,14 @@ class LeavesbalancesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $leavesbalance = $this->Leavesbalances->get($id);
-        if ($this->Leavesbalances->delete($leavesbalance)) {
+
+        $leavesbalance->modifiedby = $session->read('Auth.Username');
+        $leavesbalance->deleted = 0;
+
+        if ($this->Leavesbalances->save($leavesbalance)) {
             $this->Flash->success(__('The leavesbalance has been deleted.'));
         } else {
             $this->Flash->error(__('The leavesbalance could not be deleted. Please, try again.'));

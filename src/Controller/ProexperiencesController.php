@@ -17,7 +17,7 @@ class ProexperiencesController extends AppController
      */
     public function index()
     {
-        $query = $this->Proexperiences->find()
+        $query = $this->Proexperiences->find()->where(['proexperiences.deleted' => 0])
             ->contain(['Users']);
         $proexperiences = $this->paginate($query);
 
@@ -44,9 +44,15 @@ class ProexperiencesController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $proexperience = $this->Proexperiences->newEmptyEntity();
         if ($this->request->is('post')) {
             $proexperience = $this->Proexperiences->patchEntity($proexperience, $this->request->getData());
+
+            $proexperience->createdby = $session->read('Auth.Username');
+            $proexperience->modifiedby = $session->read('Auth.Username');
+            $proexperience->deleted = 0;
+
             if ($this->Proexperiences->save($proexperience)) {
                 $this->Flash->success(__('The proexperience has been saved.'));
 
@@ -67,9 +73,13 @@ class ProexperiencesController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $proexperience = $this->Proexperiences->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $proexperience = $this->Proexperiences->patchEntity($proexperience, $this->request->getData());
+
+            $proexperience->modifiedby = $session->read('Auth.Username');
+
             if ($this->Proexperiences->save($proexperience)) {
                 $this->Flash->success(__('The proexperience has been saved.'));
 
@@ -90,9 +100,14 @@ class ProexperiencesController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $proexperience = $this->Proexperiences->get($id);
-        if ($this->Proexperiences->delete($proexperience)) {
+
+        $proexperience->modifiedby = $session->read('Auth.Username');
+        $proexperience->deleted = 0;
+
+        if ($this->Proexperiences->save($proexperience)) {
             $this->Flash->success(__('The proexperience has been deleted.'));
         } else {
             $this->Flash->error(__('The proexperience could not be deleted. Please, try again.'));

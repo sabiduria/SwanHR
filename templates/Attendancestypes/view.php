@@ -46,7 +46,7 @@
                 <h4><?= __('Related Attendances') ?></h4>
                 <?php if (!empty($attendancestype->attendances)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>

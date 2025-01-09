@@ -17,7 +17,7 @@ class HolidaysController extends AppController
      */
     public function index()
     {
-        $query = $this->Holidays->find();
+        $query = $this->Holidays->find()->where(['holidays.deleted' => 0]);
         $holidays = $this->paginate($query);
 
         $this->set(compact('holidays'));
@@ -43,9 +43,15 @@ class HolidaysController extends AppController
      */
     public function add()
     {
+        $session = $this->request->getSession();
         $holiday = $this->Holidays->newEmptyEntity();
         if ($this->request->is('post')) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->getData());
+
+            $holiday->createdby = $session->read('Auth.Username');
+            $holiday->modifiedby = $session->read('Auth.Username');
+            $holiday->deleted = 0;
+
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
@@ -65,9 +71,13 @@ class HolidaysController extends AppController
      */
     public function edit($id = null)
     {
+        $session = $this->request->getSession();
         $holiday = $this->Holidays->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->getData());
+
+            $holiday->modifiedby = $session->read('Auth.Username');
+
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
@@ -87,9 +97,14 @@ class HolidaysController extends AppController
      */
     public function delete($id = null)
     {
+        $session = $this->request->getSession();
         $this->request->allowMethod(['post', 'delete']);
         $holiday = $this->Holidays->get($id);
-        if ($this->Holidays->delete($holiday)) {
+
+        $holiday->modifiedby = $session->read('Auth.Username');
+        $holiday->deleted = 0;
+
+        if ($this->Holidays->save($holiday)) {
             $this->Flash->success(__('The holiday has been deleted.'));
         } else {
             $this->Flash->error(__('The holiday could not be deleted. Please, try again.'));

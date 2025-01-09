@@ -46,7 +46,7 @@
                 <h4><?= __('Related Leaves') ?></h4>
                 <?php if (!empty($leavestype->leaves)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('Leavestype Id') ?></th>
@@ -95,7 +95,7 @@
                 <h4><?= __('Related Leavesbalances') ?></h4>
                 <?php if (!empty($leavestype->leavesbalances)) : ?>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>

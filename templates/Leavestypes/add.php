@@ -7,12 +7,11 @@
 <div class="mt-3">
     <?= $this->Form->create($leavestype) ?>
         <div class="row gy-2">
-            <h3><?= __('Add Leavestype') ?></h3>
             <div class="col-xl-12">
-                <?= $this->Form->control('name', ['class'=>'form-control']); ?>
+                <?= $this->Form->control('name', ['class' => 'form-control', 'label' => 'name']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('maxdaysperyear', ['class'=>'form-control']); ?>
+                <?= $this->Form->control('maxdaysperyear', ['class' => 'form-control', 'label' => 'maxdaysperyear']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">
