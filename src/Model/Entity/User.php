@@ -31,6 +31,7 @@ use Cake\ORM\Entity;
  * @property string|null $education_level
  * @property string|null $education_option
  * @property \Cake\I18n\Date|null $affectation_date
+ * @property string $bio
  * @property string|null $username
  * @property string|null $password
  * @property \Cake\I18n\DateTime|null $created
@@ -79,6 +80,7 @@ class User extends Entity
         'education_level' => true,
         'education_option' => true,
         'affectation_date' => true,
+        'bio' => true,
         'username' => true,
         'password' => true,
         'created' => true,

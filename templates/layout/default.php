@@ -33,6 +33,14 @@ $username = $session->read('Auth.Username');
     <?= $this->Html->css(['bootstrap.min', 'icons.min', 'metisMenu.min', 'app.min',
         'datatables/dataTables.bootstrap5.min', 'datatables/buttons.bootstrap5.min', 'datatables/responsive.bootstrap4.min',
         'daterangepicker/daterangepicker', 'select2/select2.min', 'dropify/dropify.min.css']) ?>
+
+
+    <?php
+    if ($this->request->getParam('controller') === 'Users' && $this->request->getParam('action') === 'view') {
+        echo $this->Html->css(['styles']);
+    }
+    ?>
+
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css" >
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-thin.css">
 

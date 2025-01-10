@@ -3,347 +3,384 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+$this->assign('title', 'test');
 ?>
-<div class="row">
-    <div class="column column-80">
-        <div class="users view content">
-            <h3><?= h($user->id) ?></h3>
-            <table class="table">
-                <tr>
-                    <th><?= __('Firstname') ?></th>
-                    <td><?= h($user->firstname) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Secondname') ?></th>
-                    <td><?= h($user->secondname) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Lastname') ?></th>
-                    <td><?= h($user->lastname) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Occupation') ?></th>
-                    <td><?= $user->hasValue('occupation') ? $this->Html->link($user->occupation->name, ['controller' => 'Occupations', 'action' => 'view', $user->occupation->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Maritalstatus') ?></th>
-                    <td><?= h($user->maritalstatus) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Email') ?></th>
-                    <td><?= h($user->email) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Phone1') ?></th>
-                    <td><?= h($user->phone1) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Phone2') ?></th>
-                    <td><?= h($user->phone2) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Birthplace') ?></th>
-                    <td><?= h($user->birthplace) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Gender') ?></th>
-                    <td><?= h($user->gender) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Nationality') ?></th>
-                    <td><?= h($user->nationality) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Typeofidentitypiece') ?></th>
-                    <td><?= h($user->typeofidentitypiece) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Identitypiecenumber') ?></th>
-                    <td><?= h($user->identitypiecenumber) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Address Number') ?></th>
-                    <td><?= h($user->address_number) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Address Avenue') ?></th>
-                    <td><?= h($user->address_avenue) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Address District') ?></th>
-                    <td><?= h($user->address_district) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Address Municipality') ?></th>
-                    <td><?= h($user->address_municipality) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Education Level') ?></th>
-                    <td><?= h($user->education_level) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Education Option') ?></th>
-                    <td><?= h($user->education_option) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Username') ?></th>
-                    <td><?= h($user->username) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Createdby') ?></th>
-                    <td><?= h($user->createdby) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modifiedby') ?></th>
-                    <td><?= h($user->modifiedby) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($user->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Birthdate') ?></th>
-                    <td><?= h($user->birthdate) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Affectation Date') ?></th>
-                    <td><?= h($user->affectation_date) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($user->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($user->modified) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Deleted') ?></th>
-                    <td><?= $user->deleted ? __('Yes') : __('No'); ?></td>
-                </tr>
-            </table>
-            <div class="related">
-                <h4><?= __('Related Attendances') ?></h4>
-                <?php if (!empty($user->attendances)) : ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Attendancestype Id') ?></th>
-                            <th><?= __('Check In') ?></th>
-                            <th><?= __('Check Out') ?></th>
-                            <th><?= __('Notes') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($user->attendances as $attendance) : ?>
-                        <tr>
-                            <td><?= h($attendance->id) ?></td>
-                            <td><?= h($attendance->user_id) ?></td>
-                            <td><?= h($attendance->attendancestype_id) ?></td>
-                            <td><?= h($attendance->check_in) ?></td>
-                            <td><?= h($attendance->check_out) ?></td>
-                            <td><?= h($attendance->notes) ?></td>
-                            <td><?= h($attendance->created) ?></td>
-                            <td><?= h($attendance->modified) ?></td>
-                            <td><?= h($attendance->createdby) ?></td>
-                            <td><?= h($attendance->modifiedby) ?></td>
-                            <td><?= h($attendance->deleted) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id], ['class' => 'btn btn-success btn-sm']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
+<div class="row mt-3">
+    <div class="col-xl-12">
+        <div class="card custom-card profile-card">
+            <div class="profile-banner-img">
+                <?= $this->Html->image('media-3', ['class'=>'card-img-top']) ?>
             </div>
-            <div class="related">
-                <h4><?= __('Related Dependents') ?></h4>
-                <?php if (!empty($user->dependents)) : ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Relationship Id') ?></th>
-                            <th><?= __('Fistname') ?></th>
-                            <th><?= __('Secondname') ?></th>
-                            <th><?= __('Lastname') ?></th>
-                            <th><?= __('Gender') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($user->dependents as $dependent) : ?>
-                        <tr>
-                            <td><?= h($dependent->id) ?></td>
-                            <td><?= h($dependent->user_id) ?></td>
-                            <td><?= h($dependent->relationship_id) ?></td>
-                            <td><?= h($dependent->fistname) ?></td>
-                            <td><?= h($dependent->secondname) ?></td>
-                            <td><?= h($dependent->lastname) ?></td>
-                            <td><?= h($dependent->gender) ?></td>
-                            <td><?= h($dependent->created) ?></td>
-                            <td><?= h($dependent->modified) ?></td>
-                            <td><?= h($dependent->createdby) ?></td>
-                            <td><?= h($dependent->modifiedby) ?></td>
-                            <td><?= h($dependent->deleted) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Dependents', 'action' => 'view', $dependent->id], ['class' => 'btn btn-success btn-sm']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Dependents', 'action' => 'edit', $dependent->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dependents', 'action' => 'delete', $dependent->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
+            <div class="card-body pb-0 position-relative">
+                <div class="row profile-content">
+                    <div class="col-xl-3">
+                        <div class="card custom-card overflow-hidden border">
+                            <div class="card-body border-bottom border-block-end-dashed">
+                                <div class="text-center">
+                                  <span class="avatar avatar-xxl avatar-rounded online mb-3">
+                                      <?= $this->Html->image('11', ['class'=>'card-img-top']) ?>
+                                  </span>
+                                    <h5 class="fw-semibold mb-1"><?= h($user->firstname) ?> <?= h($user->secondname) ?> <?= h($user->lastname) ?></h5>
+                                    <span class="d-block fw-medium text-muted mb-2"><?= $user->hasValue('occupation') ? $this->Html->link($user->occupation->name, ['controller' => 'Occupations', 'action' => 'view', $user->occupation->id]) : '' ?></span>
+                                </div>
+                            </div>
+                            <div class="p-3 pb-1 d-flex flex-wrap justify-content-between">
+                                <div class="fw-medium fs-15 text-primary1"> Basic Info : </div>
+                            </div>
+                            <div class="card-body border-bottom border-block-end-dashed p-0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Gender :</span>
+                                            <span class="text-muted"><?= h($user->gender) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Birthdate :</span>
+                                            <span class="text-muted"><?= date('Y-m-d', strtotime($user->birthdate)) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Birth Place :</span>
+                                            <span class="text-muted"><?= h($user->birthplace) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Email :</span>
+                                            <span class="text-muted"><?= h($user->email) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Typ. Of ID Piece :</span>
+                                            <span class="text-muted"><?= h($user->typeofidentitypiece) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">ID. Number :</span>
+                                            <span class="text-muted"><?= h($user->identitypiecenumber) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Education Level :</span>
+                                            <span class="text-muted"><?= h($user->education_level) ?></span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item pt-2 border-0">
+                                        <div>
+                                            <span class="fw-medium me-2">Education Option :</span>
+                                            <span class="text-muted"><?= h($user->education_option) ?></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9">
+                        <div class="card custom-card overflow-hidden border">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs tab-style-6 mb-3 p-0" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start active" id="profile-about-tab" data-bs-toggle="tab" data-bs-target="#profile-about-tab-pane" type="button" role="tab" aria-controls="profile-about-tab-pane" aria-selected="true">About</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start" id="attendances-tab" data-bs-toggle="tab" data-bs-target="#attendances-tab-pane" type="button" role="tab" aria-controls="edit-profile-tab-pane" aria-selected="false" tabindex="-1">Attendances</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start" id="dependents-tab" data-bs-toggle="tab" data-bs-target="#dependents-tab-pane" type="button" role="tab" aria-controls="timeline-tab-pane" aria-selected="false" tabindex="-1">Dependents</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start" id="leave-tab" data-bs-toggle="tab" data-bs-target="#leave-tab-pane" type="button" role="tab" aria-controls="gallery-tab-pane" aria-selected="false" tabindex="-1">Leaves</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="profile-tabs">
+                                    <div class="tab-pane show active p-0 border-0" id="profile-about-tab-pane" role="tabpanel" aria-labelledby="profile-about-tab" tabindex="0">
+                                        <ul class="list-group list-group-flush border rounded-3">
+                                            <li class="list-group-item p-3">
+                                                <span class="fw-medium fs-15 d-block mb-3">
+                                                  <span class="me-1">✨</span>About Info :
+                                                </span>
+                                                <p class="text-muted mb-2" style="text-align: justify">
+                                                    <?= h($user->bio) ?>
+                                                </p>
+                                            </li>
+                                            <li class="list-group-item p-3">
+                                                <span class="fw-medium fs-15 d-block mb-3">Contact Info :</span>
+                                                <div class="text-muted">
+                                                    <p class="mb-3">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary p-1 bg-primary-transparent me-2">
+                                                          <i class="fa-thin fa-envelope-open-text"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Email : </span> <?= h($user->email) ?>
+                                                    </p>
+                                                    <p class="mb-3">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary p-1 bg-primary-transparent me-2">
+                                                          <i class="fa-thin fa-phone"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Phone 1 : </span> <?= h($user->phone1) ?>
+                                                    </p>
+                                                    <p class="mb-3">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary p-1 bg-primary-transparent me-2">
+                                                          <i class="fa-thin fa-phone"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Phone 2 : </span> <?= h($user->phone2) ?>
+                                                    </p>
+                                                    <p class="mb-3">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary1 p-1 bg-primary1-transparent me-2">
+                                                          <i class="fa-thin fa-person-sign"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Marital Status : </span> <?= h($user->maritalstatus) ?>
+                                                    </p>
+                                                    <p class="mb-3">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary2 p-1 bg-primary2-transparent me-2">
+                                                          <i class="fa-thin fa-address-card"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Nationality : </span> <?= h($user->nationality) ?>
+                                                    </p>
+                                                    <p class="mb-0">
+                                                        <span class="avatar avatar-sm avatar-rounded text-primary3 p-1 bg-primary3-transparent me-2">
+                                                          <i class="fa-thin fa-map-location-dot"></i>
+                                                        </span>
+                                                        <span class="fw-medium text-default">Address : </span> <?= h($user->address_number) ?>, <?= h($user->address_avenue) ?> - <?= h($user->address_district) ?>, <?= h($user->address_municipality) ?>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item p-3">
+                                                <span class="fw-medium fs-15 d-block mb-3">
+                                                    Professional Experiences :
+                                                    <?= $this->Html->link(__('<i class="fa-thin fa-plus"></i>'), ['action' => 'add', $user->id], ['class' => 'btn btn-sm btn-icon btn-primary-light', 'escape' => false]) ?>
+                                                </span>
+                                                <div class="row">
+                                                    <div class="related">
+                                                        <?php if (!empty($user->proexperiences)) : ?>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered">
+                                                                    <tr>
+                                                                        <th><?= __('Period') ?></th>
+                                                                        <th><?= __('Institution') ?></th>
+                                                                        <th><?= __('Occupation') ?></th>
+                                                                        <th class="actions"><?= __('Actions') ?></th>
+                                                                    </tr>
+                                                                    <?php foreach ($user->proexperiences as $proexperience) : ?>
+                                                                        <tr>
+                                                                            <td><?= date('Y-m-d', strtotime($proexperience->startdate)) ?> to <?= date('Y-m-d', strtotime($proexperience->endate)) ?></td>
+                                                                            <td><?= h($proexperience->institution) ?></td>
+                                                                            <td><?= h($proexperience->occupation) ?></td>
+                                                                            <td class="actions">
+                                                                                <?= $this->Html->link(__('View'), ['controller' => 'Proexperiences', 'action' => 'view', $proexperience->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                                <?= $this->Html->link(__('Edit'), ['controller' => 'Proexperiences', 'action' => 'edit', $proexperience->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                                                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Proexperiences', 'action' => 'delete', $proexperience->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php endforeach; ?>
+                                                                </table>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="attendances-tab-pane" role="tabpanel" aria-labelledby="edit-profile-tab" tabindex="0">
+                                        <div class="row">
+                                            <div class="related">
+                                                <h4><?= __('Related Attendances') ?></h4>
+                                                <?php if (!empty($user->attendances)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th><?= __('Id') ?></th>
+                                                                <th><?= __('User Id') ?></th>
+                                                                <th><?= __('Attendancestype Id') ?></th>
+                                                                <th><?= __('Check In') ?></th>
+                                                                <th><?= __('Check Out') ?></th>
+                                                                <th><?= __('Notes') ?></th>
+                                                                <th><?= __('Created') ?></th>
+                                                                <th><?= __('Modified') ?></th>
+                                                                <th><?= __('Createdby') ?></th>
+                                                                <th><?= __('Modifiedby') ?></th>
+                                                                <th><?= __('Deleted') ?></th>
+                                                                <th class="actions"><?= __('Actions') ?></th>
+                                                            </tr>
+                                                            <?php foreach ($user->attendances as $attendance) : ?>
+                                                                <tr>
+                                                                    <td><?= h($attendance->id) ?></td>
+                                                                    <td><?= h($attendance->user_id) ?></td>
+                                                                    <td><?= h($attendance->attendancestype_id) ?></td>
+                                                                    <td><?= h($attendance->check_in) ?></td>
+                                                                    <td><?= h($attendance->check_out) ?></td>
+                                                                    <td><?= h($attendance->notes) ?></td>
+                                                                    <td><?= h($attendance->created) ?></td>
+                                                                    <td><?= h($attendance->modified) ?></td>
+                                                                    <td><?= h($attendance->createdby) ?></td>
+                                                                    <td><?= h($attendance->modifiedby) ?></td>
+                                                                    <td><?= h($attendance->deleted) ?></td>
+                                                                    <td class="actions">
+                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Attendances', 'action' => 'view', $attendance->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Attendances', 'action' => 'edit', $attendance->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attendances', 'action' => 'delete', $attendance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="dependents-tab-pane" role="tabpanel" aria-labelledby="timeline-tab" tabindex="0">
+                                        <div class="row">
+                                            <div class="related">
+                                                <h4><?= __('Related Dependents') ?></h4>
+                                                <?php if (!empty($user->dependents)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th><?= __('Id') ?></th>
+                                                                <th><?= __('User Id') ?></th>
+                                                                <th><?= __('Relationship Id') ?></th>
+                                                                <th><?= __('Fistname') ?></th>
+                                                                <th><?= __('Secondname') ?></th>
+                                                                <th><?= __('Lastname') ?></th>
+                                                                <th><?= __('Gender') ?></th>
+                                                                <th><?= __('Created') ?></th>
+                                                                <th><?= __('Modified') ?></th>
+                                                                <th><?= __('Createdby') ?></th>
+                                                                <th><?= __('Modifiedby') ?></th>
+                                                                <th><?= __('Deleted') ?></th>
+                                                                <th class="actions"><?= __('Actions') ?></th>
+                                                            </tr>
+                                                            <?php foreach ($user->dependents as $dependent) : ?>
+                                                                <tr>
+                                                                    <td><?= h($dependent->id) ?></td>
+                                                                    <td><?= h($dependent->user_id) ?></td>
+                                                                    <td><?= h($dependent->relationship_id) ?></td>
+                                                                    <td><?= h($dependent->fistname) ?></td>
+                                                                    <td><?= h($dependent->secondname) ?></td>
+                                                                    <td><?= h($dependent->lastname) ?></td>
+                                                                    <td><?= h($dependent->gender) ?></td>
+                                                                    <td><?= h($dependent->created) ?></td>
+                                                                    <td><?= h($dependent->modified) ?></td>
+                                                                    <td><?= h($dependent->createdby) ?></td>
+                                                                    <td><?= h($dependent->modifiedby) ?></td>
+                                                                    <td><?= h($dependent->deleted) ?></td>
+                                                                    <td class="actions">
+                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Dependents', 'action' => 'view', $dependent->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Dependents', 'action' => 'edit', $dependent->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dependents', 'action' => 'delete', $dependent->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="leave-tab-pane" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0">
+                                        <div class="row">
+                                            <div class="related">
+                                                <h4><?= __('Related Leavesbalances') ?></h4>
+                                                <?php if (!empty($user->leavesbalances)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th><?= __('Id') ?></th>
+                                                                <th><?= __('User Id') ?></th>
+                                                                <th><?= __('Leavestype Id') ?></th>
+                                                                <th><?= __('Availablebalance') ?></th>
+                                                                <th><?= __('Balanceyear') ?></th>
+                                                                <th><?= __('Created') ?></th>
+                                                                <th><?= __('Modified') ?></th>
+                                                                <th><?= __('Createdby') ?></th>
+                                                                <th><?= __('Modifiedby') ?></th>
+                                                                <th><?= __('Deleted') ?></th>
+                                                                <th class="actions"><?= __('Actions') ?></th>
+                                                            </tr>
+                                                            <?php foreach ($user->leavesbalances as $leavesbalance) : ?>
+                                                                <tr>
+                                                                    <td><?= h($leavesbalance->id) ?></td>
+                                                                    <td><?= h($leavesbalance->user_id) ?></td>
+                                                                    <td><?= h($leavesbalance->leavestype_id) ?></td>
+                                                                    <td><?= h($leavesbalance->availablebalance) ?></td>
+                                                                    <td><?= h($leavesbalance->balanceyear) ?></td>
+                                                                    <td><?= h($leavesbalance->created) ?></td>
+                                                                    <td><?= h($leavesbalance->modified) ?></td>
+                                                                    <td><?= h($leavesbalance->createdby) ?></td>
+                                                                    <td><?= h($leavesbalance->modifiedby) ?></td>
+                                                                    <td><?= h($leavesbalance->deleted) ?></td>
+                                                                    <td class="actions">
+                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Leavesbalances', 'action' => 'view', $leavesbalance->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Leavesbalances', 'action' => 'edit', $leavesbalance->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leavesbalances', 'action' => 'delete', $leavesbalance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="related">
+                                                <h4><?= __('Related Leaves') ?></h4>
+                                                <?php if (!empty($user->leaves)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th><?= __('Id') ?></th>
+                                                                <th><?= __('Leavestype Id') ?></th>
+                                                                <th><?= __('Status Id') ?></th>
+                                                                <th><?= __('User Id') ?></th>
+                                                                <th><?= __('Startdate') ?></th>
+                                                                <th><?= __('Enddate') ?></th>
+                                                                <th><?= __('Reason') ?></th>
+                                                                <th><?= __('Approvedby') ?></th>
+                                                                <th><?= __('Approveddate') ?></th>
+                                                                <th><?= __('Created') ?></th>
+                                                                <th><?= __('Modified') ?></th>
+                                                                <th><?= __('Createdby') ?></th>
+                                                                <th><?= __('Modifiedby') ?></th>
+                                                                <th><?= __('Deleted') ?></th>
+                                                                <th class="actions"><?= __('Actions') ?></th>
+                                                            </tr>
+                                                            <?php foreach ($user->leaves as $leave) : ?>
+                                                                <tr>
+                                                                    <td><?= h($leave->id) ?></td>
+                                                                    <td><?= h($leave->leavestype_id) ?></td>
+                                                                    <td><?= h($leave->status_id) ?></td>
+                                                                    <td><?= h($leave->user_id) ?></td>
+                                                                    <td><?= h($leave->startdate) ?></td>
+                                                                    <td><?= h($leave->enddate) ?></td>
+                                                                    <td><?= h($leave->reason) ?></td>
+                                                                    <td><?= h($leave->approvedby) ?></td>
+                                                                    <td><?= h($leave->approveddate) ?></td>
+                                                                    <td><?= h($leave->created) ?></td>
+                                                                    <td><?= h($leave->modified) ?></td>
+                                                                    <td><?= h($leave->createdby) ?></td>
+                                                                    <td><?= h($leave->modifiedby) ?></td>
+                                                                    <td><?= h($leave->deleted) ?></td>
+                                                                    <td class="actions">
+                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                        <?= $this->Html->link(__('Edit'), ['controller' => 'Leaves', 'action' => 'edit', $leave->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                                                                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leaves', 'action' => 'delete', $leave->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Leaves') ?></h4>
-                <?php if (!empty($user->leaves)) : ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Leavestype Id') ?></th>
-                            <th><?= __('Status Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Startdate') ?></th>
-                            <th><?= __('Enddate') ?></th>
-                            <th><?= __('Reason') ?></th>
-                            <th><?= __('Approvedby') ?></th>
-                            <th><?= __('Approveddate') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($user->leaves as $leave) : ?>
-                        <tr>
-                            <td><?= h($leave->id) ?></td>
-                            <td><?= h($leave->leavestype_id) ?></td>
-                            <td><?= h($leave->status_id) ?></td>
-                            <td><?= h($leave->user_id) ?></td>
-                            <td><?= h($leave->startdate) ?></td>
-                            <td><?= h($leave->enddate) ?></td>
-                            <td><?= h($leave->reason) ?></td>
-                            <td><?= h($leave->approvedby) ?></td>
-                            <td><?= h($leave->approveddate) ?></td>
-                            <td><?= h($leave->created) ?></td>
-                            <td><?= h($leave->modified) ?></td>
-                            <td><?= h($leave->createdby) ?></td>
-                            <td><?= h($leave->modifiedby) ?></td>
-                            <td><?= h($leave->deleted) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id], ['class' => 'btn btn-success btn-sm']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leaves', 'action' => 'edit', $leave->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leaves', 'action' => 'delete', $leave->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Leavesbalances') ?></h4>
-                <?php if (!empty($user->leavesbalances)) : ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Leavestype Id') ?></th>
-                            <th><?= __('Availablebalance') ?></th>
-                            <th><?= __('Balanceyear') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($user->leavesbalances as $leavesbalance) : ?>
-                        <tr>
-                            <td><?= h($leavesbalance->id) ?></td>
-                            <td><?= h($leavesbalance->user_id) ?></td>
-                            <td><?= h($leavesbalance->leavestype_id) ?></td>
-                            <td><?= h($leavesbalance->availablebalance) ?></td>
-                            <td><?= h($leavesbalance->balanceyear) ?></td>
-                            <td><?= h($leavesbalance->created) ?></td>
-                            <td><?= h($leavesbalance->modified) ?></td>
-                            <td><?= h($leavesbalance->createdby) ?></td>
-                            <td><?= h($leavesbalance->modifiedby) ?></td>
-                            <td><?= h($leavesbalance->deleted) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Leavesbalances', 'action' => 'view', $leavesbalance->id], ['class' => 'btn btn-success btn-sm']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Leavesbalances', 'action' => 'edit', $leavesbalance->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Leavesbalances', 'action' => 'delete', $leavesbalance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Proexperiences') ?></h4>
-                <?php if (!empty($user->proexperiences)) : ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Startdate') ?></th>
-                            <th><?= __('Endate') ?></th>
-                            <th><?= __('Institution') ?></th>
-                            <th><?= __('Occupation') ?></th>
-                            <th><?= __('Comments') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($user->proexperiences as $proexperience) : ?>
-                        <tr>
-                            <td><?= h($proexperience->id) ?></td>
-                            <td><?= h($proexperience->user_id) ?></td>
-                            <td><?= h($proexperience->startdate) ?></td>
-                            <td><?= h($proexperience->endate) ?></td>
-                            <td><?= h($proexperience->institution) ?></td>
-                            <td><?= h($proexperience->occupation) ?></td>
-                            <td><?= h($proexperience->comments) ?></td>
-                            <td><?= h($proexperience->created) ?></td>
-                            <td><?= h($proexperience->modified) ?></td>
-                            <td><?= h($proexperience->createdby) ?></td>
-                            <td><?= h($proexperience->modifiedby) ?></td>
-                            <td><?= h($proexperience->deleted) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Proexperiences', 'action' => 'view', $proexperience->id], ['class' => 'btn btn-success btn-sm']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Proexperiences', 'action' => 'edit', $proexperience->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Proexperiences', 'action' => 'delete', $proexperience->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
             </div>
         </div>
     </div>

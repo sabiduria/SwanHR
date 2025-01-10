@@ -183,6 +183,11 @@ class UsersTable extends Table
             ->allowEmptyDate('affectation_date');
 
         $validator
+            ->scalar('bio')
+            ->requirePresence('bio', 'create')
+            ->notEmptyString('bio');
+
+        $validator
             ->scalar('username')
             ->maxLength('username', 45)
             ->allowEmptyString('username');

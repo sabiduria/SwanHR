@@ -4,6 +4,8 @@
  * @var \App\Model\Entity\User $user
  * @var \Cake\Collection\CollectionInterface|string[] $occupations
  */
+$gender = ['M' => 'Male', 'F' => 'Female'];
+$marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => 'Divorced'];
 ?>
 <div class="mt-3">
     <?= $this->Form->create($user) ?>
@@ -36,10 +38,10 @@
             <?= $this->Form->control('birthdate', ['empty' => true, 'class'=>'form-control', 'label'=>'Birth Date']); ?>
         </div>
         <div class="col-xl-1">
-            <?= $this->Form->control('gender', ['class'=>'form-control', 'label'=>'Gender']); ?>
+            <?= $this->Form->control('gender', ['options'=>$gender, 'class'=>'form-select select2', 'label'=>'Gender']); ?>
         </div>
         <div class="col-xl-3">
-            <?= $this->Form->control('maritalstatus', ['class'=>'form-control', 'label'=>'Marital Status']); ?>
+            <?= $this->Form->control('maritalstatus', ['options'=>$marital_status, 'class'=>'form-select select2', 'label'=>'Marital Status']); ?>
         </div>
         <div class="col-xl-4">
             <?= $this->Form->control('nationality', ['class'=>'form-control', 'label'=>'Nationality']); ?>
@@ -70,6 +72,9 @@
         </div>
         <div class="col-xl-12">
             <?= $this->Form->control('affectation_date', ['empty' => true, 'class'=>'form-control', 'label'=>'Affectation Date']); ?>
+        </div>
+        <div class="col-xl-12">
+            <?= $this->Form->control('bio', ['empty' => true, 'class'=>'form-control', 'label'=>'Biography']); ?>
         </div>
         <div class="col-xl-6">
             <?= $this->Form->control('username', ['class'=>'form-control', 'label'=>'Username']); ?>
