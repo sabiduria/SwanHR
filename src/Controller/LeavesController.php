@@ -49,6 +49,7 @@ class LeavesController extends AppController
         if ($this->request->is('post')) {
             $leave = $this->Leaves->patchEntity($leave, $this->request->getData());
 
+            $leave->status_id = 1;
             $leave->createdby = $session->read('Auth.Username');
             $leave->modifiedby = $session->read('Auth.Username');
             $leave->deleted = 0;

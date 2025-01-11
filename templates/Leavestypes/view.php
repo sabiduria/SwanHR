@@ -3,12 +3,15 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Leavestype $leavestype
  */
+
+use App\Controller\GeneralController;
+
 ?>
 <div class="row">
     <div class="column column-80">
         <div class="leavestypes view content">
             <h3><?= h($leavestype->name) ?></h3>
-            <table class="table">
+            <table class="table table-bordered">
                 <tr>
                     <th><?= __('Name') ?></th>
                     <td><?= h($leavestype->name) ?></td>
@@ -37,10 +40,6 @@
                     <th><?= __('Modified') ?></th>
                     <td><?= h($leavestype->modified) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Deleted') ?></th>
-                    <td><?= $leavestype->deleted ? __('Yes') : __('No'); ?></td>
-                </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Leaves') ?></h4>
@@ -49,37 +48,27 @@
                     <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Leavestype Id') ?></th>
-                            <th><?= __('Status Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Startdate') ?></th>
-                            <th><?= __('Enddate') ?></th>
-                            <th><?= __('Reason') ?></th>
-                            <th><?= __('Approvedby') ?></th>
-                            <th><?= __('Approveddate') ?></th>
+                            <th><?= __('Leaves type') ?></th>
+                            <th><?= __('Status') ?></th>
+                            <th><?= __('Staff Member') ?></th>
+                            <th><?= __('Start date') ?></th>
+                            <th><?= __('End date') ?></th>
+                            <th><?= __('Approved by') ?></th>
+                            <th><?= __('Approved date') ?></th>
                             <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($leavestype->leaves as $leave) : ?>
                         <tr>
                             <td><?= h($leave->id) ?></td>
-                            <td><?= h($leave->leavestype_id) ?></td>
-                            <td><?= h($leave->status_id) ?></td>
-                            <td><?= h($leave->user_id) ?></td>
+                            <td><?= GeneralController::getNameOf($leave->leavestype_id, 'leavestypes') ?></td>
+                            <td><?= GeneralController::getNameOf($leave->status_id, 'statuses') ?></td>
+                            <td><?= GeneralController::getUserNameOf($leave->user_id) ?></td>
                             <td><?= h($leave->startdate) ?></td>
                             <td><?= h($leave->enddate) ?></td>
-                            <td><?= h($leave->reason) ?></td>
                             <td><?= h($leave->approvedby) ?></td>
                             <td><?= h($leave->approveddate) ?></td>
                             <td><?= h($leave->created) ?></td>
-                            <td><?= h($leave->modified) ?></td>
-                            <td><?= h($leave->createdby) ?></td>
-                            <td><?= h($leave->modifiedby) ?></td>
-                            <td><?= h($leave->deleted) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id], ['class' => 'btn btn-success btn-sm']) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Leaves', 'action' => 'edit', $leave->id], ['class' => 'btn btn-primary btn-sm']) ?>
@@ -92,35 +81,25 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Leavesbalances') ?></h4>
+                <h4><?= __('Related Leaves balances') ?></h4>
                 <?php if (!empty($leavestype->leavesbalances)) : ?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Leavestype Id') ?></th>
-                            <th><?= __('Availablebalance') ?></th>
-                            <th><?= __('Balanceyear') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th><?= __('Createdby') ?></th>
-                            <th><?= __('Modifiedby') ?></th>
-                            <th><?= __('Deleted') ?></th>
+                            <th><?= __('Staff Member') ?></th>
+                            <th><?= __('Leaves type') ?></th>
+                            <th><?= __('Available balance') ?></th>
+                            <th><?= __('Balance year') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($leavestype->leavesbalances as $leavesbalance) : ?>
                         <tr>
                             <td><?= h($leavesbalance->id) ?></td>
-                            <td><?= h($leavesbalance->user_id) ?></td>
-                            <td><?= h($leavesbalance->leavestype_id) ?></td>
+                            <td><?= GeneralController::getUserNameOf($leavesbalance->user_id) ?></td>
+                            <td><?= GeneralController::getNameOf($leavesbalance->leavestype_id, 'leavestypes') ?></td>
                             <td><?= h($leavesbalance->availablebalance) ?></td>
                             <td><?= h($leavesbalance->balanceyear) ?></td>
-                            <td><?= h($leavesbalance->created) ?></td>
-                            <td><?= h($leavesbalance->modified) ?></td>
-                            <td><?= h($leavesbalance->createdby) ?></td>
-                            <td><?= h($leavesbalance->modifiedby) ?></td>
-                            <td><?= h($leavesbalance->deleted) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Leavesbalances', 'action' => 'view', $leavesbalance->id], ['class' => 'btn btn-success btn-sm']) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Leavesbalances', 'action' => 'edit', $leavesbalance->id], ['class' => 'btn btn-primary btn-sm']) ?>

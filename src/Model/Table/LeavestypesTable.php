@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
+use Cake\Event\EventInterface;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 /**
@@ -88,5 +91,30 @@ class LeavestypesTable extends Table
             ->allowEmptyString('deleted');
 
         return $validator;
+    }
+
+    public function afterSave(EventInterface $event, $entity, ArrayObject $options): void
+    {
+        if ($entity->isNew()) {
+            // Fetch all users
+            $usersTable = TableRegistry::getTableLocator()->get('Users');
+            $users = $usersTable->find('all');
+
+            // Add rows to Leavesbalances for each user
+            $leavesbalancesTable = TableRegistry::getTableLocator()->get('Leavesbalances');
+            foreach ($users as $user) {
+                $leavesbalancesTable->save($leavesbalancesTable->newEntity([
+                    'user_id' => $user->id,
+                    'leavestype_id' => $entity->id,
+                    'availablebalance' => $entity->maxdaysperyear,
+                    'balanceyear' => date('Y'),
+                    'created' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
+                    'createdby' => "SwanHR",
+                    'modifiedby' => "SwanHR",
+                    'deleted' => 0,
+                ]));
+            }
+        }
     }
 }

@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
+use Cake\Event\EventInterface;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 /**
@@ -47,7 +50,7 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('id');
+        $this->setDisplayField(['firstname', 'secondname', 'lastname']);
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -228,5 +231,30 @@ class UsersTable extends Table
         $rules->add($rules->existsIn(['occupation_id'], 'Occupations'), ['errorField' => 'occupation_id']);
 
         return $rules;
+    }
+
+    public function afterSave(EventInterface $event, $entity, ArrayObject $options): void
+    {
+        if ($entity->isNew()) {
+            // Fetch all leavestypes
+            $leavestypesTable = TableRegistry::getTableLocator()->get('Leavestypes');
+            $leavestypes = $leavestypesTable->find('all');
+
+            // Add rows to Leavesbalances for each leavestype
+            $leavesbalancesTable = TableRegistry::getTableLocator()->get('Leavesbalances');
+            foreach ($leavestypes as $leavestype) {
+                $leavesbalancesTable->save($leavesbalancesTable->newEntity([
+                    'user_id' => $entity->id,
+                    'leavestype_id' => $leavestype->id,
+                    'availablebalance' => $leavestype->maxdaysperyear,
+                    'balanceyear' => date('Y'),
+                    'created' => date('Y-m-d H:i:s'),
+                    'modified' => date('Y-m-d H:i:s'),
+                    'createdby' => "SwanHR",
+                    'modifiedby' => "SwanHR",
+                    'deleted' => 0,
+                ]));
+            }
+        }
     }
 }

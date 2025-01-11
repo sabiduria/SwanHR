@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
+use Cake\Event\EventInterface;
+use Cake\I18n\DateTime;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
+use DateInterval;
+use DatePeriod;
 
 /**
  * Leaves Model
@@ -134,5 +140,54 @@ class LeavesTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
 
         return $rules;
+    }
+
+    public function afterSave(EventInterface $event, $entity, ArrayObject $options): void
+    {
+        // Define the "Approved" status ID
+        $approvedStatusId = 2; // Replace with the actual ID for "Approved" in your statuses table
+
+        // Check if the status has been updated to "Approved"
+        if ($entity->isDirty('status_id') && $entity->status_id == $approvedStatusId) {
+            // Calculate the number of leave days, excluding holidays and weekends
+            $startDate = new DateTime($entity->startdate);
+            $endDate = new DateTime($entity->enddate);
+            $interval = new DateInterval('P1D');
+            $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
+
+            // Fetch holiday dates in the range
+            $holidaysTable = TableRegistry::getTableLocator()->get('Holidays');
+            $holidays = $holidaysTable->find('list', ['valueField' => 'holidaydate'])
+                ->where([
+                    'holidaydate >=' => $startDate->format('Y-m-d'),
+                    'holidaydate <=' => $endDate->format('Y-m-d'),
+                ])
+                ->toArray();
+
+            // Count leave days excluding holidays and weekends
+            $daysRequested = 0;
+            foreach ($dateRange as $date) {
+                $dayOfWeek = $date->format('N'); // Day of the week (1 = Monday, 7 = Sunday)
+                if (!in_array($date->format('Y-m-d'), $holidays) && $dayOfWeek < 6) {
+                    $daysRequested++; // Exclude Saturdays (6) and Sundays (7)
+                }
+            }
+
+            // Fetch the Leavesbalance entry for the user and leave type
+            $leavesbalancesTable = TableRegistry::getTableLocator()->get('Leavesbalances');
+            $balance = $leavesbalancesTable->find()
+                ->where([
+                    'user_id' => $entity->user_id,
+                    'leavestype_id' => $entity->leavestype_id,
+                    'balanceyear' => date('Y'),
+                ])
+                ->first();
+
+            if ($balance) {
+                // Decrease the available balance
+                $balance->availablebalance -= $daysRequested;
+                $leavesbalancesTable->save($balance);
+            }
+        }
     }
 }

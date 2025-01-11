@@ -11,28 +11,19 @@
     <?= $this->Form->create($leave) ?>
         <div class="row gy-2">
             <div class="col-xl-12">
-                <?= $this->Form->control('leavestype_id', ['options' => $leavestypes, 'class' => 'form-select select2', 'label' => 'leavestype_id']); ?>
+                <?= $this->Form->control('leavestype_id', ['options' => $leavestypes, 'class' => 'form-select select2', 'label' => 'Leaves Type']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('status_id', ['options' => $statuses, 'empty' => true, 'class' => 'form-select select2', 'label' => 'status_id']); ?>
+                <?= $this->Form->control('user_id', ['options' => $users, 'class' => 'form-select select2', 'label' => 'Staff Member']); ?>
+            </div>
+            <div class="col-xl-6">
+                <?= $this->Form->control('startdate', ['empty' => true, 'class' => 'form-control', 'label' => 'Start Date']); ?>
+            </div>
+            <div class="col-xl-6">
+                <?= $this->Form->control('enddate', ['empty' => true, 'class' => 'form-control', 'label' => 'End Date']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('user_id', ['options' => $users, 'class' => 'form-select select2', 'label' => 'user_id']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('startdate', ['empty' => true, 'class' => 'form-control', 'label' => 'startdate']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('enddate', ['empty' => true, 'class' => 'form-control', 'label' => 'enddate']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('reason', ['class' => 'form-control', 'label' => 'reason']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('approvedby', ['class' => 'form-control', 'label' => 'approvedby']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('approveddate', ['empty' => true, 'class' => 'form-control', 'label' => 'approveddate']); ?>
+                <?= $this->Form->control('reason', ['class' => 'form-control', 'label' => 'Reason']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">
