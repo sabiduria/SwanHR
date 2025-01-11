@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
+
 /**
  * Leaves Controller
  *
@@ -119,5 +121,23 @@ class LeavesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function approve($leaveId, $statusId)
+    {
+        $session = $this->request->getSession();
+        // Get the Leaves table instance
+        $leavesTable = TableRegistry::getTableLocator()->get('Leaves');
+        $leave = $leavesTable->get($leaveId);
+
+        $leave->status_id = $statusId;
+        $leave->modifiedby = $session->read('Auth.Username');
+        $leave->approvedby = ucfirst($session->read('Auth.Username'));
+        $leave->approveddate = date('Y-m-d');
+
+        // Save the updated record
+        if ($leavesTable->save($leave)) {
+            return $this->redirect(['action' => 'view', $leaveId]);
+        }
     }
 }

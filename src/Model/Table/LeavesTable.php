@@ -148,7 +148,7 @@ class LeavesTable extends Table
         $approvedStatusId = 2; // Replace with the actual ID for "Approved" in your statuses table
 
         // Check if the status has been updated to "Approved"
-        if ($entity->isDirty('status_id') && $entity->status_id == $approvedStatusId) {
+        if ($entity->isDirty('status_id') && $entity->status_id == $approvedStatusId && $entity->approvedby == "") {
             // Calculate the number of leave days, excluding holidays and weekends
             $startDate = new DateTime($entity->startdate);
             $endDate = new DateTime($entity->enddate);
