@@ -8,7 +8,7 @@
     <?= $this->Form->create($occupation) ?>
         <div class="row gy-2">
             <div class="col-xl-12">
-                <?= $this->Form->control('name', ['class' => 'form-control', 'label' => 'name']); ?>
+                <?= $this->Form->control('name', ['class' => 'form-control', 'label' => 'Name']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">
