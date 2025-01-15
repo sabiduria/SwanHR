@@ -42,13 +42,14 @@ class DependentsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($user_id)
     {
         $session = $this->request->getSession();
         $dependent = $this->Dependents->newEmptyEntity();
         if ($this->request->is('post')) {
             $dependent = $this->Dependents->patchEntity($dependent, $this->request->getData());
 
+            $dependent->user_id = $user_id;
             $dependent->createdby = $session->read('Auth.Username');
             $dependent->modifiedby = $session->read('Auth.Username');
             $dependent->deleted = 0;
@@ -56,7 +57,7 @@ class DependentsController extends AppController
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'users', 'action' => 'view', $user_id]);
             }
             $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
         }
@@ -84,7 +85,7 @@ class DependentsController extends AppController
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'users', 'action' => 'view', $dependent->user_id]);
             }
             $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
         }
@@ -115,6 +116,6 @@ class DependentsController extends AppController
             $this->Flash->error(__('The dependent could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'users', 'action' => 'view', $dependent->user_id]);
     }
 }

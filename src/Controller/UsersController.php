@@ -34,7 +34,8 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, contain: ['Occupations', 'Attendances', 'Dependents', 'Leaves', 'Leavesbalances', 'Proexperiences']);
-        $this->set(compact('user'));
+        $relationships = $this->fetchTable('relationships')->find('list', limit: 200)->all();
+        $this->set(compact('user', 'relationships'));
     }
 
     /**

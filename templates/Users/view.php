@@ -2,11 +2,13 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
+ * @var iterable<\App\Model\Entity\Relationship> $relationships
  */
 
 use App\Controller\GeneralController;
 
 $this->assign('title', 'test');
+$gender = ['M' => 'Male', 'F' => 'Female'];
 ?>
 <div class="row mt-3">
     <div class="col-xl-12">
@@ -224,41 +226,33 @@ $this->assign('title', 'test');
                                     <div class="tab-pane" id="dependents-tab-pane" role="tabpanel" aria-labelledby="timeline-tab" tabindex="0">
                                         <div class="row">
                                             <div class="related">
-                                                <h4><?= __('Related Dependents') ?></h4>
+                                                <span class="fw-medium fs-15 d-block mb-3">
+                                                    Dependents :
+                                                    <button class="btn btn-sm btn-primary-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDependents" aria-controls="offcanvasDependents"><i class="fa-thin fa-plus"></i> ADD</button>
+                                                </span>
                                                 <?php if (!empty($user->dependents)) : ?>
                                                     <div class="table-responsive">
                                                         <table class="table table-bordered">
                                                             <tr>
                                                                 <th><?= __('Id') ?></th>
-                                                                <th><?= __('User Id') ?></th>
-                                                                <th><?= __('Relationship Id') ?></th>
-                                                                <th><?= __('Fistname') ?></th>
+                                                                <th><?= __('Relationship') ?></th>
+                                                                <th><?= __('Firstname') ?></th>
                                                                 <th><?= __('Secondname') ?></th>
                                                                 <th><?= __('Lastname') ?></th>
                                                                 <th><?= __('Gender') ?></th>
                                                                 <th><?= __('Created') ?></th>
-                                                                <th><?= __('Modified') ?></th>
-                                                                <th><?= __('Createdby') ?></th>
-                                                                <th><?= __('Modifiedby') ?></th>
-                                                                <th><?= __('Deleted') ?></th>
                                                                 <th class="actions"><?= __('Actions') ?></th>
                                                             </tr>
                                                             <?php foreach ($user->dependents as $dependent) : ?>
                                                                 <tr>
                                                                     <td><?= h($dependent->id) ?></td>
-                                                                    <td><?= h($dependent->user_id) ?></td>
-                                                                    <td><?= h($dependent->relationship_id) ?></td>
+                                                                    <td><?= GeneralController::getNameOf($dependent->relationship_id, 'relationships') ?></td>
                                                                     <td><?= h($dependent->fistname) ?></td>
                                                                     <td><?= h($dependent->secondname) ?></td>
                                                                     <td><?= h($dependent->lastname) ?></td>
                                                                     <td><?= h($dependent->gender) ?></td>
                                                                     <td><?= h($dependent->created) ?></td>
-                                                                    <td><?= h($dependent->modified) ?></td>
-                                                                    <td><?= h($dependent->createdby) ?></td>
-                                                                    <td><?= h($dependent->modifiedby) ?></td>
-                                                                    <td><?= h($dependent->deleted) ?></td>
                                                                     <td class="actions">
-                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Dependents', 'action' => 'view', $dependent->id], ['class' => 'btn btn-success btn-sm']) ?>
                                                                         <?= $this->Html->link(__('Edit'), ['controller' => 'Dependents', 'action' => 'edit', $dependent->id], ['class' => 'btn btn-primary btn-sm']) ?>
                                                                         <?= $this->Form->postLink(__('Delete'), ['controller' => 'Dependents', 'action' => 'delete', $dependent->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                                                                     </td>
@@ -363,6 +357,45 @@ $this->assign('title', 'test');
                 </div>
                 <div class="col-xl-12">
                     <?= $this->Form->control('comments', ['type' => 'textarea', 'class' => 'form-control', 'label' => 'Comments']); ?>
+                </div>
+            </div>
+            <div class="mt-3 mb-3">
+                <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
+            </div>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDependents"
+     aria-labelledby="offcanvasRightLabel1">
+    <div class="offcanvas-header border-bottom border-block-end-dashed">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel1">Dependents
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <div class="row">
+            <?= $this->Form->create(null, [
+                'url' => ['controller' => 'dependents', 'action' => 'add', $user->id],
+                'type'=>'post'
+            ]);?>
+            <div class="row gy-2">
+                <div class="col-xl-12">
+                    <?= $this->Form->control('relationship_id', ['options' => $relationships, 'class' => 'form-select', 'label' => 'Relationship']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('fistname', ['class' => 'form-control', 'label' => 'Firstname']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('secondname', ['class' => 'form-control', 'label' => 'Second name']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('lastname', ['class' => 'form-control', 'label' => 'Lastname']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('gender', ['options' => $gender, 'class' => 'form-select', 'label' => 'Gender']); ?>
                 </div>
             </div>
             <div class="mt-3 mb-3">
