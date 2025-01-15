@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var iterable<\App\Model\Entity\Leave> $leaves
+ */
+
+use App\Controller\GeneralController;
+
+?>
 <!-- Start:: row-1 -->
 <div class="row mt-3">
     <div class="col-xxl-3 col-xl-6">
@@ -85,60 +94,37 @@
                         </tr>
                         </thead>
                         <tbody class="">
+                        <?php foreach ($leaves as $leave): ?>
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-sm">
-                                        <img src="../assets/images/faces/2.jpg" class="" alt="">
+                                        <?= $this->Html->image('11') ?>
                                     </span>
                                     <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Socrates Itumay</p>
+                                        <p class="mb-0 fs-12 fw-medium"><?= GeneralController::getUserNameOf($leave->user_id) ?> </p>
                                         <a href="javascript:void(0);" class="fs-11 text-muted">Team Lead</a>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <span class="">Sick</span>
+                                <span class=""><?= GeneralController::getNameOf($leave->leavestype_id, 'leavestypes') ?></span>
                             </td>
                             <td>
-                                <span class="">2 Days</span>
+                                <span class=""><?= GeneralController::dateDiffInDays($leave->startdate, $leave->enddate) ?> Days</span>
                             </td>
                             <td>
-                                <span class="badge bg-success-transparent">Approved</span>
+                                <?php if ($leave->status_id == 2): ?>
+                                    <span class="badge bg-success-transparent">Approved</span>
+                                <?php elseif ($leave->status_id == 3) :?>
+                                    <span class="badge bg-danger-transparent">Rejected</span>
+                                <?php else: ?>
+                                    <span class="badge bg-warning-transparent">Waiting</span>
+                                <?php endif; ?>
+
                             </td>
                             <td>
-                                <span class="fs-12">30-05-2024</span>
-                            </td>
-                            <td>
-                                <div class="btn-list">
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" class="btn btn-icon btn-sm rounded-pill btn-info-light"><i class="ti ti-pencil"></i></a>
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" class="btn btn-icon btn-sm rounded-pill  btn-primary2-light"><i class="ti ti-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="avatar avatar-sm">
-                                        <img src="../assets/images/faces/4.jpg" class="" alt="">
-                                    </span>
-                                    <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Samantha Paul</p>
-                                        <a href="javascript:void(0);" class="fs-11 text-muted">Sr.UI Developer</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="">Casual</span>
-                            </td>
-                            <td>
-                                <span class="">1 Day</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-warning-transparent">Pending</span>
-                            </td>
-                            <td>
-                                <span class="fs-12">29-05-2024</span>
+                                <span class="fs-12"><?= $leave->startdate ?></span>
                             </td>
                             <td>
                                 <div class="btn-list">
@@ -147,132 +133,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="avatar avatar-sm">
-                                        <img src="../assets/images/faces/14.jpg" class="" alt="">
-                                    </span>
-                                    <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Gray Noal</p>
-                                        <a href="javascript:void(0);" class="fs-11 text-muted">Java Developer</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="">Paternity</span>
-                            </td>
-                            <td>
-                                <span class="">5 Days</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-success-transparent">Approved</span>
-                            </td>
-                            <td>
-                                <span class="fs-12">28-05-2024</span>
-                            </td>
-                            <td>
-                                <div class="btn-list">
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" class="btn btn-icon btn-sm rounded-pill btn-info-light"><i class="ti ti-pencil"></i></a>
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" class="btn btn-icon btn-sm rounded-pill  btn-primary2-light"><i class="ti ti-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                                        <span class="avatar avatar-sm">
-                                                            <img src="../assets/images/faces/15.jpg" class="" alt="">
-                                                        </span>
-                                    <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Gray Noal</p>
-                                        <a href="javascript:void(0);" class="fs-11 text-muted">React Developer</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="">Personal</span>
-                            </td>
-                            <td>
-                                <span class="">2 Days</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger-transparent">Rejected</span>
-                            </td>
-                            <td>
-                                <span class="fs-12">27-05-2024</span>
-                            </td>
-                            <td>
-                                <div class="btn-list">
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" class="btn btn-icon btn-sm rounded-pill btn-info-light"><i class="ti ti-pencil"></i></a>
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" class="btn btn-icon btn-sm rounded-pill  btn-primary2-light"><i class="ti ti-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                                        <span class="avatar avatar-sm">
-                                                            <img src="../assets/images/faces/8.jpg" class="" alt="">
-                                                        </span>
-                                    <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Emiley Jackson</p>
-                                        <a href="javascript:void(0);" class="fs-11 text-muted">Full Stack Developer</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="">Maternity</span>
-                            </td>
-                            <td>
-                                <span class="">2 Days</span>
-                            </td>
-                            <td>
-                                                    <span class="badge bg-success-transparent">Approved
-                                                    </span>
-                            </td>
-                            <td>
-                                <span class="fs-12">26-05-2024</span>
-                            </td>
-                            <td>
-                                <div class="btn-list">
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" class="btn btn-icon btn-sm rounded-pill btn-info-light"><i class="ti ti-pencil"></i></a>
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" class="btn btn-icon btn-sm rounded-pill  btn-primary2-light"><i class="ti ti-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                                        <span class="avatar avatar-sm">
-                                                            <img src="../assets/images/faces/16.jpg" class="" alt="">
-                                                        </span>
-                                    <div class="flex-1 ms-2">
-                                        <p class="mb-0 fs-12 fw-medium">Pope Johnson</p>
-                                        <a href="javascript:void(0);" class="fs-11 text-muted">Jr.Java Developer</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="">Gifted</span>
-                            </td>
-                            <td>
-                                <span class="">2 Days</span>
-                            </td>
-                            <td>
-                                                    <span class="badge bg-warning-transparent">Pending
-                                                    </span>
-                            </td>
-                            <td>
-                                <span class="fs-12">25-05-2024</span>
-                            </td>
-                            <td>
-                                <div class="btn-list">
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" class="btn btn-icon btn-sm rounded-pill btn-info-light"><i class="ti ti-pencil"></i></a>
-                                    <a aria-label="anchor" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" class="btn btn-icon btn-sm rounded-pill  btn-primary2-light"><i class="ti ti-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
