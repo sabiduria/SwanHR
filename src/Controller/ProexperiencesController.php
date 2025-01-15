@@ -42,12 +42,15 @@ class ProexperiencesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($user_id = null)
     {
         $session = $this->request->getSession();
         $proexperience = $this->Proexperiences->newEmptyEntity();
         if ($this->request->is('post')) {
             $proexperience = $this->Proexperiences->patchEntity($proexperience, $this->request->getData());
+
+            if ($user_id != null)
+                $proexperience->user_id = $user_id;
 
             $proexperience->createdby = $session->read('Auth.Username');
             $proexperience->modifiedby = $session->read('Auth.Username');
@@ -56,7 +59,10 @@ class ProexperiencesController extends AppController
             if ($this->Proexperiences->save($proexperience)) {
                 $this->Flash->success(__('The proexperience has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                if ($user_id != null)
+                    return $this->redirect(['controller' => 'users', 'action' => 'view', $user_id]);
+                else
+                    return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The proexperience could not be saved. Please, try again.'));
         }
@@ -83,7 +89,7 @@ class ProexperiencesController extends AppController
             if ($this->Proexperiences->save($proexperience)) {
                 $this->Flash->success(__('The proexperience has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'users', 'action' => 'view', $proexperience->user_id]);
             }
             $this->Flash->error(__('The proexperience could not be saved. Please, try again.'));
         }
@@ -113,6 +119,6 @@ class ProexperiencesController extends AppController
             $this->Flash->error(__('The proexperience could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'users', 'action' => 'view', $proexperience->user_id]);
     }
 }

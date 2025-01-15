@@ -156,7 +156,7 @@ $this->assign('title', 'test');
                                             <li class="list-group-item p-3">
                                                 <span class="fw-medium fs-15 d-block mb-3">
                                                     Professional Experiences :
-                                                    <?= $this->Html->link(__('<i class="fa-thin fa-plus"></i>'), ['action' => 'add', $user->id], ['class' => 'btn btn-sm btn-icon btn-primary-light', 'escape' => false]) ?>
+                                                    <button class="btn btn-sm btn-primary-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProExp" aria-controls="offcanvasProExp"><i class="fa-thin fa-plus"></i> ADD</button>
                                                 </span>
                                                 <div class="row">
                                                     <div class="related">
@@ -175,7 +175,6 @@ $this->assign('title', 'test');
                                                                             <td><?= h($proexperience->institution) ?></td>
                                                                             <td><?= h($proexperience->occupation) ?></td>
                                                                             <td class="actions">
-                                                                                <?= $this->Html->link(__('View'), ['controller' => 'Proexperiences', 'action' => 'view', $proexperience->id], ['class' => 'btn btn-success btn-sm']) ?>
                                                                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Proexperiences', 'action' => 'edit', $proexperience->id], ['class' => 'btn btn-primary btn-sm']) ?>
                                                                                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Proexperiences', 'action' => 'delete', $proexperience->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                                                                             </td>
@@ -345,6 +344,45 @@ $this->assign('title', 'test');
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasProExp"
+     aria-labelledby="offcanvasRightLabel1">
+    <div class="offcanvas-header border-bottom border-block-end-dashed">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel1">Professional Experiences
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-3">
+        <div class="row">
+            <?= $this->Form->create(null, [
+                'url' => ['controller' => 'proexperiences', 'action' => 'add', $user->id],
+                'type'=>'post'
+            ]);?>
+            <div class="row gy-2">
+                <div class="col-xl-12">
+                    <?= $this->Form->control('startdate', ['type' => 'date', 'class' => 'form-control', 'label' => 'Start Date']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('endate', ['type' => 'date', 'class' => 'form-control', 'label' => 'End Date']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('institution', ['class' => 'form-control', 'label' => 'Institution']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('occupation', ['class' => 'form-control', 'label' => 'Occupation']); ?>
+                </div>
+                <div class="col-xl-12">
+                    <?= $this->Form->control('comments', ['type' => 'textarea', 'class' => 'form-control', 'label' => 'Comments']); ?>
+                </div>
+            </div>
+            <div class="mt-3 mb-3">
+                <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
+            </div>
+            <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
