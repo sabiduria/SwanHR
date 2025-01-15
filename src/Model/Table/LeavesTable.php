@@ -149,13 +149,22 @@ class LeavesTable extends Table
 
         // Check if the status has been updated to "Approved"
         if ($entity->isDirty('status_id') && $entity->status_id == $approvedStatusId) {
-            // Calculate the number of leave days, excluding holidays and weekends
+            // Calculate the total leave days, excluding weekends
             $startDate = new DateTime($entity->startdate);
             $endDate = new DateTime($entity->enddate);
             $interval = new DateInterval('P1D');
-            $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
+            $endDate->modify('+1 day'); // Include the end date in the date period
+            $dateRange = new DatePeriod($startDate, $interval, $endDate);
 
-            // Fetch holiday dates in the range
+            $daysRequested = 0;
+            foreach ($dateRange as $date) {
+                $dayOfWeek = $date->format('N'); // Day of the week (1 = Monday, 7 = Sunday)
+                if ($dayOfWeek < 6) { // Exclude Saturdays (6) and Sundays (7)
+                    $daysRequested++;
+                }
+            }
+
+            // Fetch holidays in the leave period
             $holidaysTable = TableRegistry::getTableLocator()->get('Holidays');
             $holidays = $holidaysTable->find('list', ['valueField' => 'holidaydate'])
                 ->where([
@@ -164,14 +173,11 @@ class LeavesTable extends Table
                 ])
                 ->toArray();
 
-            // Count leave days excluding holidays and weekends
-            $daysRequested = 0;
-            foreach ($dateRange as $date) {
-                $dayOfWeek = $date->format('N'); // Day of the week (1 = Monday, 7 = Sunday)
-                if (!in_array($date->format('Y-m-d'), $holidays) && $dayOfWeek < 6) {
-                    $daysRequested++; // Exclude Saturdays (6) and Sundays (7)
-                }
-            }
+            // Count the holidays
+            $holidaysCount = count($holidays);
+
+            // Subtract holidays from the requested days
+            $finalDaysRequested = $daysRequested - $holidaysCount;
 
             // Fetch the Leavesbalance entry for the user and leave type
             $leavesbalancesTable = TableRegistry::getTableLocator()->get('Leavesbalances');
@@ -184,10 +190,11 @@ class LeavesTable extends Table
                 ->first();
 
             if ($balance) {
-                // Decrease the available balance
-                $balance->availablebalance -= $daysRequested;
+                // Decrease the available balance by the final days requested
+                $balance->availablebalance -= $finalDaysRequested;
                 $leavesbalancesTable->save($balance);
             }
         }
     }
+
 }
