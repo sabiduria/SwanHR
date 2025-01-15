@@ -66,7 +66,7 @@ class AttendancestypesTable extends Table
             ->allowEmptyString('name');
 
         $validator
-            ->integer('penality')
+            ->numeric('penality')
             ->allowEmptyString('penality');
 
         $validator

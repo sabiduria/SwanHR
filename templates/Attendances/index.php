@@ -17,10 +17,7 @@
                     <th><?= $this->Paginator->sort('check_in') ?></th>
                     <th><?= $this->Paginator->sort('check_out') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= $this->Paginator->sort('createdby') ?></th>
-                    <th><?= $this->Paginator->sort('modifiedby') ?></th>
-                    <th><?= $this->Paginator->sort('deleted') ?></th>
+                    <th><?= $this->Paginator->sort('created by') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -28,17 +25,13 @@
                 <?php foreach ($attendances as $attendance): ?>
                 <tr>
                     <td><?= $this->Number->format($attendance->id) ?></td>
-                    <td><?= $attendance->hasValue('user') ? $this->Html->link($attendance->user->id, ['controller' => 'Users', 'action' => 'view', $attendance->user->id]) : '' ?></td>
+                    <td><?= $attendance->hasValue('user') ? $this->Html->link($attendance->user->firstname.' '.$attendance->user->secondname.' '.$attendance->user->lastname, ['controller' => 'Users', 'action' => 'view', $attendance->user->id]) : '' ?></td>
                     <td><?= $attendance->hasValue('attendancestype') ? $this->Html->link($attendance->attendancestype->name, ['controller' => 'Attendancestypes', 'action' => 'view', $attendance->attendancestype->id]) : '' ?></td>
                     <td><?= h($attendance->check_in) ?></td>
                     <td><?= h($attendance->check_out) ?></td>
                     <td><?= h($attendance->created) ?></td>
-                    <td><?= h($attendance->modified) ?></td>
                     <td><?= h($attendance->createdby) ?></td>
-                    <td><?= h($attendance->modifiedby) ?></td>
-                    <td><?= h($attendance->deleted) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $attendance->id], ['class' => 'btn btn-success btn-sm']) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $attendance->id], ['class' => 'btn btn-primary btn-sm']) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $attendance->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
                     </td>

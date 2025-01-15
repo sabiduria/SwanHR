@@ -8,42 +8,8 @@
     <div class="column column-80">
         <div class="attendancestypes view content">
             <h3><?= h($attendancestype->name) ?></h3>
-            <table class="table">
-                <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($attendancestype->name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Createdby') ?></th>
-                    <td><?= h($attendancestype->createdby) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modifiedby') ?></th>
-                    <td><?= h($attendancestype->modifiedby) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($attendancestype->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Penality') ?></th>
-                    <td><?= $attendancestype->penality === null ? '' : $this->Number->format($attendancestype->penality) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($attendancestype->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($attendancestype->modified) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Deleted') ?></th>
-                    <td><?= $attendancestype->deleted ? __('Yes') : __('No'); ?></td>
-                </tr>
-            </table>
             <div class="related">
-                <h4><?= __('Related Attendances') ?></h4>
+                <h4><?= __('Attendances') ?></h4>
                 <?php if (!empty($attendancestype->attendances)) : ?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
