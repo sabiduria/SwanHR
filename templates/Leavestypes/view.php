@@ -61,8 +61,8 @@ use App\Controller\GeneralController;
                         <?php foreach ($leavestype->leaves as $leave) : ?>
                         <tr>
                             <td><?= h($leave->id) ?></td>
-                            <td><?= GeneralController::getNameOf($leave->leavestype_id, 'leavestypes') ?></td>
-                            <td><?= GeneralController::getNameOf($leave->status_id, 'statuses') ?></td>
+                            <td><?= GeneralController::getNameOf($leave->leavestype_id, 'Leavestypes') ?></td>
+                            <td><?= GeneralController::getNameOf($leave->status_id, 'Statuses') ?></td>
                             <td><?= GeneralController::getUserNameOf($leave->user_id) ?></td>
                             <td><?= h($leave->startdate) ?></td>
                             <td><?= h($leave->enddate) ?></td>
@@ -97,7 +97,7 @@ use App\Controller\GeneralController;
                         <tr>
                             <td><?= h($leavesbalance->id) ?></td>
                             <td><?= GeneralController::getUserNameOf($leavesbalance->user_id) ?></td>
-                            <td><?= GeneralController::getNameOf($leavesbalance->leavestype_id, 'leavestypes') ?></td>
+                            <td><?= GeneralController::getNameOf($leavesbalance->leavestype_id, 'Leavestypes') ?></td>
                             <td><?= h($leavesbalance->availablebalance) ?></td>
                             <td><?= h($leavesbalance->balanceyear) ?></td>
                             <td class="actions">

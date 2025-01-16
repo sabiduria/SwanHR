@@ -17,7 +17,7 @@ class DependentsController extends AppController
      */
     public function index()
     {
-        $query = $this->Dependents->find()->where(['dependents.deleted' => 0])
+        $query = $this->Dependents->find()->where(['Dependents.deleted' => 0])
             ->contain(['Users', 'Relationships']);
         $dependents = $this->paginate($query);
 

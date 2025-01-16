@@ -17,7 +17,7 @@ class RelationshipsController extends AppController
      */
     public function index()
     {
-        $query = $this->Relationships->find()->where(['relationships.deleted' => 0]);
+        $query = $this->Relationships->find()->where(['Relationships.deleted' => 0]);
         $relationships = $this->paginate($query);
 
         $this->set(compact('relationships'));

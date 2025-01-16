@@ -17,7 +17,7 @@ class AttendancesController extends AppController
      */
     public function index()
     {
-        $query = $this->Attendances->find()->where(['attendances.deleted' => 0])
+        $query = $this->Attendances->find()->where(['Attendances.deleted' => 0])
             ->contain(['Users', 'Attendancestypes']);
         $attendances = $this->paginate($query);
 

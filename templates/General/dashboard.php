@@ -99,7 +99,7 @@ use App\Controller\GeneralController;
                             <td>
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-sm">
-                                        <?= $this->Html->image('11') ?>
+                                        <?= $this->Html->image('11.jpg') ?>
                                     </span>
                                     <div class="flex-1 ms-2">
                                         <p class="mb-0 fs-12 fw-medium"><?= GeneralController::getUserNameOf($leave->user_id) ?> </p>
@@ -108,7 +108,7 @@ use App\Controller\GeneralController;
                                 </div>
                             </td>
                             <td>
-                                <span class=""><?= GeneralController::getNameOf($leave->leavestype_id, 'leavestypes') ?></span>
+                                <span class=""><?= GeneralController::getNameOf($leave->leavestype_id, 'Leavestypes') ?></span>
                             </td>
                             <td>
                                 <span class=""><?= GeneralController::dateDiffInDays($leave->startdate, $leave->enddate) ?> Days</span>

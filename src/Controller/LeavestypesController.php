@@ -17,7 +17,7 @@ class LeavestypesController extends AppController
      */
     public function index()
     {
-        $query = $this->Leavestypes->find()->where(['leavestypes.deleted' => 0]);
+        $query = $this->Leavestypes->find()->where(['Leavestypes.deleted' => 0]);
         $leavestypes = $this->paginate($query);
 
         $this->set(compact('leavestypes'));

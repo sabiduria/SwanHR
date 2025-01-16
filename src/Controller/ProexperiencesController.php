@@ -17,7 +17,7 @@ class ProexperiencesController extends AppController
      */
     public function index()
     {
-        $query = $this->Proexperiences->find()->where(['proexperiences.deleted' => 0])
+        $query = $this->Proexperiences->find()->where(['Proexperiences.deleted' => 0])
             ->contain(['Users']);
         $proexperiences = $this->paginate($query);
 

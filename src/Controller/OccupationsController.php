@@ -17,7 +17,7 @@ class OccupationsController extends AppController
      */
     public function index()
     {
-        $query = $this->Occupations->find()->where(['occupations.deleted' => 0]);
+        $query = $this->Occupations->find()->where(['Occupations.deleted' => 0]);
         $occupations = $this->paginate($query);
 
         $this->set(compact('occupations'));

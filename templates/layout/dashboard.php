@@ -14,8 +14,8 @@
  * @var \App\View\AppView $this
  */
 
-$AppDescription = 'Douanaco';
-$company = 'Solutic Tech';
+$AppDescription = 'Swan HR';
+$company = 'Sabiantart Corporate';
 $session = $this->request->getSession();
 $username = $session->read('Auth.Username');
 ?>

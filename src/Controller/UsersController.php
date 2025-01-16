@@ -17,7 +17,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $query = $this->Users->find()->where(['users.deleted' => 0])
+        $query = $this->Users->find()->where(['Users.deleted' => 0])
             ->contain(['Occupations']);
         $users = $this->paginate($query);
 
@@ -34,7 +34,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, contain: ['Occupations', 'Attendances', 'Dependents', 'Leaves', 'Leavesbalances', 'Proexperiences']);
-        $relationships = $this->fetchTable('relationships')->find('list', limit: 200)->all();
+        $relationships = $this->fetchTable('Relationships')->find('list', limit: 200)->all();
         $this->set(compact('user', 'relationships'));
     }
 

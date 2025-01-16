@@ -17,7 +17,7 @@ class LeavesbalancesController extends AppController
      */
     public function index()
     {
-        $query = $this->Leavesbalances->find()->where(['leavesbalances.deleted' => 0])
+        $query = $this->Leavesbalances->find()->where(['Leavesbalances.deleted' => 0])
             ->contain(['Users', 'Leavestypes']);
         $leavesbalances = $this->paginate($query);
 

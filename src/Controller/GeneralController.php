@@ -46,7 +46,7 @@ class GeneralController extends AppController
 
     public function getLeaves()
     {
-        $leaves = $this->fetchTable('leaves');
+        $leaves = $this->fetchTable('Leaves');
         $query = $leaves->find();
         return $this->paginate($query);
     }

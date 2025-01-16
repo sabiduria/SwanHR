@@ -14,7 +14,7 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
     <div class="col-xl-12">
         <div class="card custom-card profile-card">
             <div class="profile-banner-img">
-                <?= $this->Html->image('media-3', ['class'=>'card-img-top']) ?>
+                <?= $this->Html->image('media-3.jpg', ['class'=>'card-img-top']) ?>
             </div>
             <div class="card-body pb-0 position-relative">
                 <div class="row profile-content">
@@ -23,7 +23,7 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                             <div class="card-body border-bottom border-block-end-dashed">
                                 <div class="text-center">
                                   <span class="avatar avatar-xxl avatar-rounded online mb-3">
-                                      <?= $this->Html->image('11', ['class'=>'card-img-top']) ?>
+                                      <?= $this->Html->image('11.jpg', ['class'=>'card-img-top']) ?>
                                   </span>
                                     <h5 class="fw-semibold mb-1"><?= h($user->firstname) ?> <?= h($user->secondname) ?> <?= h($user->lastname) ?></h5>
                                     <span class="d-block fw-medium text-muted mb-2"><?= $user->hasValue('occupation') ? $this->Html->link($user->occupation->name, ['controller' => 'Occupations', 'action' => 'view', $user->occupation->id]) : '' ?></span>
@@ -210,7 +210,7 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                                             <?php foreach ($user->attendances as $attendance) : ?>
                                                                 <tr>
                                                                     <td><?= h($attendance->id) ?></td>
-                                                                    <td><?= GeneralController::getNameOf($attendance->attendancestype_id, 'attendancestypes') ?></td>
+                                                                    <td><?= GeneralController::getNameOf($attendance->attendancestype_id, 'Attendancestypes') ?></td>
                                                                     <td><?= h($attendance->check_in) ?></td>
                                                                     <td><?= h($attendance->check_out) ?></td>
                                                                     <td><?= h($attendance->notes) ?></td>
@@ -246,7 +246,7 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                                             <?php foreach ($user->dependents as $dependent) : ?>
                                                                 <tr>
                                                                     <td><?= h($dependent->id) ?></td>
-                                                                    <td><?= GeneralController::getNameOf($dependent->relationship_id, 'relationships') ?></td>
+                                                                    <td><?= GeneralController::getNameOf($dependent->relationship_id, 'Relationships') ?></td>
                                                                     <td><?= h($dependent->fistname) ?></td>
                                                                     <td><?= h($dependent->secondname) ?></td>
                                                                     <td><?= h($dependent->lastname) ?></td>
@@ -278,7 +278,7 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                                             </tr>
                                                             <?php foreach ($user->leavesbalances as $leavesbalance) : ?>
                                                                 <tr>
-                                                                    <td><?= GeneralController::getNameOf($leavesbalance->leavestype_id, 'leavestypes') ?></td>
+                                                                    <td><?= GeneralController::getNameOf($leavesbalance->leavestype_id, 'Leavestypes') ?></td>
                                                                     <td><?= h($leavesbalance->availablebalance) ?></td>
                                                                     <td><?= h($leavesbalance->balanceyear) ?></td>
                                                                 </tr>
@@ -302,8 +302,8 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                                             </tr>
                                                             <?php foreach ($user->leaves as $leave) : ?>
                                                                 <tr>
-                                                                    <td><?= GeneralController::getNameOf($leave->leavestype_id, 'leavestypes') ?></td>
-                                                                    <td><?= GeneralController::getNameOf($leave->status_id, 'statuses') ?></td>
+                                                                    <td><?= GeneralController::getNameOf($leave->leavestype_id, 'Leavestypes') ?></td>
+                                                                    <td><?= GeneralController::getNameOf($leave->status_id, 'Statuses') ?></td>
                                                                     <td><?= date('Y-m-d', strtotime($leave->startdate)) ?> To <?= date('Y-m-d', strtotime($leave->enddate)) ?></td>
                                                                     <td><?= h($leave->approvedby) ?></td>
                                                                     <td><?= h($leave->approveddate) ?></td>
