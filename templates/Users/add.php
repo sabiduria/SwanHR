@@ -10,6 +10,9 @@ $marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => '
 <div class="mt-3">
     <?= $this->Form->create($user) ?>
     <div class="row gy-2">
+        <div class="col-xl-12">
+            <?= $this->Form->control('reference', ['class'=>'form-control', 'label'=>'Staff Number']); ?>
+        </div>
         <div class="col-xl-4">
             <?= $this->Form->control('firstname', ['class'=>'form-control', 'label'=>'First Name']); ?>
         </div>
@@ -74,7 +77,7 @@ $marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => '
             <?= $this->Form->control('affectation_date', ['empty' => true, 'class'=>'form-control', 'label'=>'Affectation Date']); ?>
         </div>
         <div class="col-xl-12">
-            <?= $this->Form->control('bio', ['empty' => true, 'class'=>'form-control', 'label'=>'Biography']); ?>
+            <?= $this->Form->control('bio', ['type' => 'textarea', 'empty' => true, 'class'=>'form-control', 'label'=>'Biography']); ?>
         </div>
         <div class="col-xl-6">
             <?= $this->Form->control('username', ['class'=>'form-control', 'label'=>'Username']); ?>

@@ -85,6 +85,11 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->scalar('reference')
+            ->maxLength('reference', 15)
+            ->allowEmptyString('reference');
+
+        $validator
             ->scalar('firstname')
             ->maxLength('firstname', 45)
             ->allowEmptyString('firstname');
@@ -226,6 +231,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
+        $rules->add($rules->isUnique(['reference']), ['errorField' => 'reference']);
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
         $rules->add($rules->isUnique(['username']), ['errorField' => 'username']);
         $rules->add($rules->existsIn(['occupation_id'], 'Occupations'), ['errorField' => 'occupation_id']);

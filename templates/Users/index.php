@@ -11,6 +11,7 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('Staff ID Number') ?></th>
                     <th><?= $this->Paginator->sort('Full Name') ?></th>
                     <th><?= $this->Paginator->sort('occupation_id') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
@@ -25,6 +26,7 @@
                 <?php foreach ($users as $user): ?>
                 <tr>
                     <td><?= $this->Number->format($user->id) ?></td>
+                    <td><?= h($user->reference) ?></td>
                     <td><?= h($user->firstname) ?> <?= h($user->secondname) ?> <?= h($user->lastname) ?></td>
                     <td><?= $user->hasValue('occupation') ? $this->Html->link($user->occupation->name, ['controller' => 'Occupations', 'action' => 'view', $user->occupation->id]) : '' ?></td>
                     <td><?= h($user->email) ?></td>

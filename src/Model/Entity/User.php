@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * User Entity
  *
  * @property int $id
+ * @property string|null $reference
  * @property string|null $firstname
  * @property string|null $secondname
  * @property string|null $lastname
@@ -59,6 +60,7 @@ class User extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
+        'reference' => true,
         'firstname' => true,
         'secondname' => true,
         'lastname' => true,
