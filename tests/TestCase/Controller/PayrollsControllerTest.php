@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\UsersController;
+use App\Controller\PayrollsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\UsersController Test Case
+ * App\Controller\PayrollsController Test Case
  *
- * @uses \App\Controller\UsersController
+ * @uses \App\Controller\PayrollsController
  */
-class UsersControllerTest extends TestCase
+class PayrollsControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,21 +22,15 @@ class UsersControllerTest extends TestCase
      * @var list<string>
      */
     protected array $fixtures = [
-        'app.Users',
-        'app.Occupations',
-        'app.Attendances',
-        'app.Dependents',
-        'app.Leaves',
-        'app.Leavesbalances',
+        'app.Payrolls',
         'app.Payslips',
-        'app.Proexperiences',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\UsersController::index()
+     * @uses \App\Controller\PayrollsController::index()
      */
     public function testIndex(): void
     {
@@ -47,7 +41,7 @@ class UsersControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\UsersController::view()
+     * @uses \App\Controller\PayrollsController::view()
      */
     public function testView(): void
     {
@@ -58,7 +52,7 @@ class UsersControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\UsersController::add()
+     * @uses \App\Controller\PayrollsController::add()
      */
     public function testAdd(): void
     {
@@ -69,7 +63,7 @@ class UsersControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\UsersController::edit()
+     * @uses \App\Controller\PayrollsController::edit()
      */
     public function testEdit(): void
     {
@@ -80,20 +74,9 @@ class UsersControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\UsersController::delete()
+     * @uses \App\Controller\PayrollsController::delete()
      */
     public function testDelete(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test login method
-     *
-     * @return void
-     * @uses \App\Controller\UsersController::login()
-     */
-    public function testLogin(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

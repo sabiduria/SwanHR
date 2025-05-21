@@ -49,6 +49,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Dependent[] $dependents
  * @property \App\Model\Entity\Leave[] $leaves
  * @property \App\Model\Entity\Leavesbalance[] $leavesbalances
+ * @property \App\Model\Entity\Payslip[] $payslips
  * @property \App\Model\Entity\Proexperience[] $proexperiences
  */
 class User extends Entity
@@ -101,6 +102,7 @@ class User extends Entity
         'dependents' => true,
         'leaves' => true,
         'leavesbalances' => true,
+        'payslips' => true,
         'proexperiences' => true,
     ];
 
@@ -117,4 +119,5 @@ class User extends Entity
     {
         return (new DefaultPasswordHasher)->hash($password);
     }
+
 }

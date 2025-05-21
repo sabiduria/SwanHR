@@ -11,13 +11,25 @@ namespace App\Controller;
 class UsersController extends AppController
 {
     /**
+     * Initialize controller
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->Authentication->allowUnauthenticated(['login']);
+    }
+
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
     public function index()
     {
-        $query = $this->Users->find()->where(['Users.deleted' => 0])
+        $query = $this->Users->find()->where(['users.deleted' => 0])
             ->contain(['Occupations']);
         $users = $this->paginate($query);
 
@@ -33,9 +45,8 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, contain: ['Occupations', 'Attendances', 'Dependents', 'Leaves', 'Leavesbalances', 'Proexperiences']);
-        $relationships = $this->fetchTable('Relationships')->find('list', limit: 200)->all();
-        $this->set(compact('user', 'relationships'));
+        $user = $this->Users->get($id, contain: ['Occupations', 'Attendances', 'Dependents', 'Leaves', 'Leavesbalances', 'Payslips', 'Proexperiences']);
+        $this->set(compact('user'));
     }
 
     /**

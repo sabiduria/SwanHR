@@ -19,6 +19,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\DependentsTable&\Cake\ORM\Association\HasMany $Dependents
  * @property \App\Model\Table\LeavesTable&\Cake\ORM\Association\HasMany $Leaves
  * @property \App\Model\Table\LeavesbalancesTable&\Cake\ORM\Association\HasMany $Leavesbalances
+ * @property \App\Model\Table\PayslipsTable&\Cake\ORM\Association\HasMany $Payslips
  * @property \App\Model\Table\ProexperiencesTable&\Cake\ORM\Association\HasMany $Proexperiences
  *
  * @method \App\Model\Entity\User newEmptyEntity()
@@ -279,4 +280,5 @@ class UsersTable extends Table
             }
         }
     }
+
 }

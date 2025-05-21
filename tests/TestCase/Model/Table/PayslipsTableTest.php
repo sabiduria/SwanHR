@@ -3,20 +3,20 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\UsersTable;
+use App\Model\Table\PayslipsTable;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\UsersTable Test Case
+ * App\Model\Table\PayslipsTable Test Case
  */
-class UsersTableTest extends TestCase
+class PayslipsTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\UsersTable
+     * @var \App\Model\Table\PayslipsTable
      */
-    protected $Users;
+    protected $Payslips;
 
     /**
      * Fixtures
@@ -24,14 +24,9 @@ class UsersTableTest extends TestCase
      * @var list<string>
      */
     protected array $fixtures = [
-        'app.Users',
-        'app.Occupations',
-        'app.Attendances',
-        'app.Dependents',
-        'app.Leaves',
-        'app.Leavesbalances',
         'app.Payslips',
-        'app.Proexperiences',
+        'app.Payrolls',
+        'app.Users',
     ];
 
     /**
@@ -42,8 +37,8 @@ class UsersTableTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $config = $this->getTableLocator()->exists('Users') ? [] : ['className' => UsersTable::class];
-        $this->Users = $this->getTableLocator()->get('Users', $config);
+        $config = $this->getTableLocator()->exists('Payslips') ? [] : ['className' => PayslipsTable::class];
+        $this->Payslips = $this->getTableLocator()->get('Payslips', $config);
     }
 
     /**
@@ -53,7 +48,7 @@ class UsersTableTest extends TestCase
      */
     protected function tearDown(): void
     {
-        unset($this->Users);
+        unset($this->Payslips);
 
         parent::tearDown();
     }
@@ -62,7 +57,7 @@ class UsersTableTest extends TestCase
      * Test validationDefault method
      *
      * @return void
-     * @uses \App\Model\Table\UsersTable::validationDefault()
+     * @uses \App\Model\Table\PayslipsTable::validationDefault()
      */
     public function testValidationDefault(): void
     {
@@ -73,7 +68,7 @@ class UsersTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
-     * @uses \App\Model\Table\UsersTable::buildRules()
+     * @uses \App\Model\Table\PayslipsTable::buildRules()
      */
     public function testBuildRules(): void
     {
