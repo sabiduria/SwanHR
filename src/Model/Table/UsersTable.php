@@ -71,6 +71,9 @@ class UsersTable extends Table
         $this->hasMany('Leavesbalances', [
             'foreignKey' => 'user_id',
         ]);
+        $this->hasMany('Payslips', [
+            'foreignKey' => 'user_id',
+        ]);
         $this->hasMany('Proexperiences', [
             'foreignKey' => 'user_id',
         ]);
@@ -191,9 +194,23 @@ class UsersTable extends Table
             ->allowEmptyDate('affectation_date');
 
         $validator
-            ->scalar('bio')
-            ->requirePresence('bio', 'create')
-            ->notEmptyString('bio');
+            ->integer('zkteco_number')
+            ->allowEmptyString('zkteco_number');
+
+        $validator
+            ->scalar('cnss')
+            ->maxLength('cnss', 45)
+            ->allowEmptyString('cnss');
+
+        $validator
+            ->scalar('bank')
+            ->maxLength('bank', 45)
+            ->allowEmptyString('bank');
+
+        $validator
+            ->scalar('bank_account')
+            ->maxLength('bank_account', 45)
+            ->allowEmptyString('bank_account');
 
         $validator
             ->scalar('username')
@@ -231,7 +248,6 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['reference']), ['errorField' => 'reference']);
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
         $rules->add($rules->isUnique(['username']), ['errorField' => 'username']);
         $rules->add($rules->existsIn(['occupation_id'], 'Occupations'), ['errorField' => 'occupation_id']);

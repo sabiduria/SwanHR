@@ -2,14 +2,25 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
- * @var string[]|\Cake\Collection\CollectionInterface $occupations
+ * @var \Cake\Collection\CollectionInterface|string[] $occupations
  */
 $gender = ['M' => 'Male', 'F' => 'Female'];
 $marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => 'Divorced'];
+$banks = [
+    'Bank Of Africa' => 'Bank Of Africa',
+    'Equity BCDC' => 'Equity BCDC',
+    'FBN BANK' => 'FBN BANK',
+    'Rawbank' => 'Rawbank',
+    'Trust Merchant Bank' => 'Trust Merchant Bank',
+    'Other' => 'Other',
+];
 ?>
 <div class="mt-3">
     <?= $this->Form->create($user) ?>
     <div class="row gy-2">
+        <div class="col-sm-12">
+            <strong>General Information</strong>
+        </div>
         <div class="col-xl-12">
             <?= $this->Form->control('reference', ['class'=>'form-control', 'label'=>'Staff Number']); ?>
         </div>
@@ -79,11 +90,34 @@ $marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => '
         <div class="col-xl-12">
             <?= $this->Form->control('bio', ['type' => 'textarea', 'empty' => true, 'class'=>'form-control', 'label'=>'Biography']); ?>
         </div>
-        <div class="col-xl-6">
-            <?= $this->Form->control('username', ['class'=>'form-control', 'label'=>'Username']); ?>
+
+        <div class="col-sm-12">
+            <hr>
+            <strong>Payroll Information</strong>
+        </div>
+
+        <div class="col-xl-12">
+            <?= $this->Form->control('cnss', ['class'=>'form-control', 'label'=>'CNSS']); ?>
         </div>
         <div class="col-xl-6">
+            <?= $this->Form->control('bank', ['options'=>$banks, 'empty' => true, 'class'=>'form-select', 'label'=>'Bank Name']); ?>
+        </div>
+        <div class="col-xl-6">
+            <?= $this->Form->control('bank_account', ['empty' => true, 'class'=>'form-control', 'label'=>'Bank Account']); ?>
+        </div>
+
+        <div class="col-sm-12">
+            <hr>
+            <strong>User Account</strong>
+        </div>
+        <div class="col-xl-5">
+            <?= $this->Form->control('username', ['class'=>'form-control', 'label'=>'Username']); ?>
+        </div>
+        <div class="col-xl-5">
             <?= $this->Form->control('password', ['class'=>'form-control', 'label'=>'Password']); ?>
+        </div>
+        <div class="col-xl-2">
+            <?= $this->Form->control('zkteco_number', ['class'=>'form-control', 'label'=>'ZKTECO ID']); ?>
         </div>
     </div>
     <div class="mt-3 mb-3">
@@ -91,4 +125,3 @@ $marital_status = ['Married' => 'Married', 'Single' => 'Single', 'Divorced' => '
     </div>
     <?= $this->Form->end() ?>
 </div>
-

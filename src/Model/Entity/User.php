@@ -32,7 +32,10 @@ use Cake\ORM\Entity;
  * @property string|null $education_level
  * @property string|null $education_option
  * @property \Cake\I18n\Date|null $affectation_date
- * @property string $bio
+ * @property int|null $zkteco_number
+ * @property string|null $cnss
+ * @property string|null $bank
+ * @property string|null $bank_account
  * @property string|null $username
  * @property string|null $password
  * @property \Cake\I18n\DateTime|null $created
@@ -82,7 +85,10 @@ class User extends Entity
         'education_level' => true,
         'education_option' => true,
         'affectation_date' => true,
-        'bio' => true,
+        'zkteco_number' => true,
+        'cnss' => true,
+        'bank' => true,
+        'bank_account' => true,
         'username' => true,
         'password' => true,
         'created' => true,
