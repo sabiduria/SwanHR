@@ -102,6 +102,9 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link w-100 text-start" id="leave-tab" data-bs-toggle="tab" data-bs-target="#leave-tab-pane" type="button" role="tab" aria-controls="gallery-tab-pane" aria-selected="false" tabindex="-1">Leaves</button>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start" id="payslips-tab" data-bs-toggle="tab" data-bs-target="#payslips-tab-pane" type="button" role="tab" aria-controls="gallery-tab-pane" aria-selected="false" tabindex="-1">Payslips</button>
+                                    </li>
                                 </ul>
                                 <div class="tab-content" id="profile-tabs">
                                     <div class="tab-pane show active p-0 border-0" id="profile-about-tab-pane" role="tabpanel" aria-labelledby="profile-about-tab" tabindex="0">
@@ -309,6 +312,37 @@ $gender = ['M' => 'Male', 'F' => 'Female'];
                                                                     <td><?= h($leave->approveddate) ?></td>
                                                                     <td class="actions">
                                                                         <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $leave->id], ['class' => 'btn btn-success btn-sm']) ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </table>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="payslips-tab-pane" role="tabpanel" aria-labelledby="gallery-tab" tabindex="0">
+                                        <div class="row">
+                                            <div class="related">
+                                                <h4><?= __('Payslips') ?></h4>
+                                                <?php if (!empty($user->payslips)) : ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th><?= __('Period') ?></th>
+                                                                <th><?= __('Hour Sup.') ?></th>
+                                                                <th><?= __('Days Working') ?></th>
+                                                                <th><?= __('Bonus') ?></th>
+                                                                <th></th>
+                                                            </tr>
+                                                            <?php foreach ($user->payslips as $payslip) : ?>
+                                                                <tr>
+                                                                    <td><?= $payslip->payroll_id ?></td>
+                                                                    <td><?= h($payslip->hour_sup) ?></td>
+                                                                    <td><?= h($payslip->nber_days) ?></td>
+                                                                    <td><?= h($payslip->primes) ?></td>
+                                                                    <td>
+                                                                        <?= $this->Html->link(__('View'), ['controller' => 'Leaves', 'action' => 'view', $payslip->id], ['class' => 'btn btn-success btn-sm']) ?>
                                                                     </td>
                                                                 </tr>
                                                             <?php endforeach; ?>

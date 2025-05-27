@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\ConnectionManager;
+use Cake\ORM\TableRegistry;
+use DateTime;
+
 /**
  * Payrolls Controller
  *
@@ -111,5 +115,64 @@ class PayrollsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function generate($id)
+    {
+        $usersTable = $this->fetchTable('Users');
+        $users = $usersTable->find()->all();
+
+        foreach ($users as $user){
+            $bank = $user->bank;
+            $bank_account = $user->bank_account;
+            $nber_days = 20;
+            $salary_per_day = self::getSalaryPerDay($user->id);
+            $monthly_salary = $salary_per_day * $nber_days;
+
+            self::NewPayslips($id, $user->id, $nber_days, $monthly_salary, $bank, $bank_account, "Payroll Team");
+        }
+
+        return $this->redirect(['action' => 'view', $id]);
+    }
+
+    public static function NewPayslips($payroll_id, $user_id, $nber_days, $monthly_salary, $bank, $bank_account, $username){
+        $connection = ConnectionManager::get('default');
+
+        $connection->insert('payslips', [
+            'payroll_id' => $payroll_id,
+            'user_id' => $user_id,
+            'hour_sup' => 0,
+            'nber_days' => $nber_days,
+            'primes' => 0,
+            'salary' => $monthly_salary,
+            'bank' => $bank,
+            'bank_account' => $bank_account,
+            'payed' => 0,
+            'published' => 0,
+
+            'created' => new DateTime('now'),
+            'modified' => new DateTime('now'),
+            'createdby' => $username,
+            'modifiedby' => $username,
+            'deleted' => 0
+        ], ['created' => 'datetime', 'modified' => 'datetime']);
+
+        $connection->update('payrolls', [
+            'actived' => 1
+        ], [
+            'id' => $payroll_id
+        ]);
+    }
+
+    public static function getSalaryPerDay($user_id): ?float
+    {
+        $table = TableRegistry::getTableLocator()->get("payrollinfos")
+            ->find()
+            ->select(['salary_per_day'])
+            ->where(['user_id' => $user_id])
+            ->orderByDesc('id')
+            ->first();
+
+        return $table ? $table->salary_per_day : 1;
     }
 }

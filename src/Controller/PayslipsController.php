@@ -79,12 +79,19 @@ class PayslipsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payslip = $this->Payslips->patchEntity($payslip, $this->request->getData());
 
+            $primes = $this->request->getData('primes');
+            $hour_sup = $this->request->getData('hour_sup');
+            $salary_per_day = PayrollsController::getSalaryPerDay($payslip->user_id);
+            $nber_day = 20;
+            $salary = ($salary_per_day * $nber_day) + ($hour_sup * ($salary_per_day / 8)) + $primes;
+
+            $payslip->salary = $salary;
             $payslip->modifiedby = $session->read('Auth.Username');
 
             if ($this->Payslips->save($payslip)) {
                 $this->Flash->success(__('The payslip has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'payrolls', 'action' => 'view', $payslip->payroll_id]);
             }
             $this->Flash->error(__('The payslip could not be saved. Please, try again.'));
         }

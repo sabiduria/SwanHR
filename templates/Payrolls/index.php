@@ -15,12 +15,9 @@
                     <th><?= $this->Paginator->sort('payroll_period') ?></th>
                     <th><?= $this->Paginator->sort('start_date') ?></th>
                     <th><?= $this->Paginator->sort('end_date') ?></th>
-                    <th><?= $this->Paginator->sort('actived') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= $this->Paginator->sort('createdby') ?></th>
-                    <th><?= $this->Paginator->sort('modifiedby') ?></th>
-                    <th><?= $this->Paginator->sort('deleted') ?></th>
+                    <th><?= $this->Paginator->sort('state') ?></th>
+                    <th><?= $this->Paginator->sort('date') ?></th>
+                    <th><?= $this->Paginator->sort('created_by') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -31,16 +28,17 @@
                     <td><?= h($payroll->payroll_period) ?></td>
                     <td><?= h($payroll->start_date) ?></td>
                     <td><?= h($payroll->end_date) ?></td>
-                    <td><?= h($payroll->actived) ?></td>
+                    <td><?= h($payroll->actived) ? 'Active' : 'Pending' ?></td>
                     <td><?= h($payroll->created) ?></td>
-                    <td><?= h($payroll->modified) ?></td>
                     <td><?= h($payroll->createdby) ?></td>
-                    <td><?= h($payroll->modifiedby) ?></td>
-                    <td><?= h($payroll->deleted) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $payroll->id], ['class' => 'btn btn-success btn-sm']) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payroll->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $payroll->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                        <?php if ($payroll->actived == 0): ?>
+                            <?= $this->Html->link(__('Generate Payslips'), ['action' => 'generate', $payroll->id], ['class' => 'btn btn-success btn-sm']) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payroll->id], ['class' => 'btn btn-primary btn-sm']) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $payroll->id], ['class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete this record ?')]) ?>
+                        <?php else: ?>
+                            <?= $this->Html->link(__('Open Payslips'), ['action' => 'view', $payroll->id], ['class' => 'btn btn-success btn-sm']) ?>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

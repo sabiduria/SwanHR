@@ -25,10 +25,19 @@
                 <?= $this->Form->control('primes', ['class' => 'form-control', 'label' => 'primes']); ?>
             </div>
             <div class="col-xl-12">
+                <?= $this->Form->control('salary', ['class' => 'form-control', 'label' => 'salary']); ?>
+            </div>
+            <div class="col-xl-12">
                 <?= $this->Form->control('bank', ['class' => 'form-control', 'label' => 'bank']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('banck_account', ['class' => 'form-control', 'label' => 'banck_account']); ?>
+                <?= $this->Form->control('bank_account', ['class' => 'form-control', 'label' => 'bank_account']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('published', ['class' => 'form-control', 'label' => 'published']); ?>
+            </div>
+            <div class="col-xl-12">
+                <?= $this->Form->control('payed', ['class' => 'form-control', 'label' => 'payed']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">

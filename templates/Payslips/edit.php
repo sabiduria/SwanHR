@@ -10,25 +10,16 @@
     <?= $this->Form->create($payslip) ?>
         <div class="row gy-2">
             <div class="col-xl-12">
-                <?= $this->Form->control('payroll_id', ['options' => $payrolls, 'class' => 'form-select select2', 'label' => 'payroll_id']); ?>
+                <?= $this->Form->control('user_id', ['options' => $users, 'class' => 'form-select select2', 'label' => 'Employee', 'disabled' => 'disabled']); ?>
             </div>
             <div class="col-xl-12">
-                <?= $this->Form->control('user_id', ['options' => $users, 'class' => 'form-select select2', 'label' => 'user_id']); ?>
+                <?= $this->Form->control('nber_days', ['class' => 'form-control', 'label' => 'Nber Days', 'disabled' => 'disabled']); ?>
             </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('hour_sup', ['class' => 'form-control', 'label' => 'hour_sup']); ?>
+            <div class="col-xl-6">
+                <?= $this->Form->control('hour_sup', ['class' => 'form-control', 'label' => 'Hours Sup.']); ?>
             </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('nber_days', ['class' => 'form-control', 'label' => 'nber_days']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('primes', ['class' => 'form-control', 'label' => 'primes']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('bank', ['class' => 'form-control', 'label' => 'bank']); ?>
-            </div>
-            <div class="col-xl-12">
-                <?= $this->Form->control('banck_account', ['class' => 'form-control', 'label' => 'banck_account']); ?>
+            <div class="col-xl-6">
+                <?= $this->Form->control('primes', ['class' => 'form-control', 'label' => 'Bonus']); ?>
             </div>
         </div>
         <div class="mt-3 mb-3">

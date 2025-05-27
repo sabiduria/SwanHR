@@ -17,8 +17,11 @@
                     <th><?= $this->Paginator->sort('hour_sup') ?></th>
                     <th><?= $this->Paginator->sort('nber_days') ?></th>
                     <th><?= $this->Paginator->sort('primes') ?></th>
+                    <th><?= $this->Paginator->sort('salary') ?></th>
                     <th><?= $this->Paginator->sort('bank') ?></th>
-                    <th><?= $this->Paginator->sort('banck_account') ?></th>
+                    <th><?= $this->Paginator->sort('bank_account') ?></th>
+                    <th><?= $this->Paginator->sort('published') ?></th>
+                    <th><?= $this->Paginator->sort('payed') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th><?= $this->Paginator->sort('createdby') ?></th>
@@ -36,8 +39,11 @@
                     <td><?= $payslip->hour_sup === null ? '' : $this->Number->format($payslip->hour_sup) ?></td>
                     <td><?= $payslip->nber_days === null ? '' : $this->Number->format($payslip->nber_days) ?></td>
                     <td><?= $payslip->primes === null ? '' : $this->Number->format($payslip->primes) ?></td>
+                    <td><?= $payslip->salary === null ? '' : $this->Number->format($payslip->salary) ?></td>
                     <td><?= h($payslip->bank) ?></td>
-                    <td><?= h($payslip->banck_account) ?></td>
+                    <td><?= h($payslip->bank_account) ?></td>
+                    <td><?= h($payslip->published) ?></td>
+                    <td><?= h($payslip->payed) ?></td>
                     <td><?= h($payslip->created) ?></td>
                     <td><?= h($payslip->modified) ?></td>
                     <td><?= h($payslip->createdby) ?></td>

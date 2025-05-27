@@ -51,6 +51,14 @@ $username = $session->read('Auth.Username');
         }
     </style>
 
+    <style type="text/css">
+        @media print {
+            body {
+                font-size: 8px;
+            }
+        }
+    </style>
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>

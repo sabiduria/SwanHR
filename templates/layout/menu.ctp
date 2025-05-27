@@ -32,6 +32,18 @@
     </li>
 
     <li>
+        <a href="javascript: void(0);"><i data-feather="dollar-sign" class="align-self-center menu-icon"></i><span>Payrolls</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+        <ul class="nav-second-level" aria-expanded="false">
+            <li class="nav-item">
+                <?= $this->Html->link('<i class="ti-control-record"></i>Payroll', ['controller'=>'payrolls', 'action'=>'index'], ['escape'=>false, 'class'=>'nav-link']) ?>
+            </li>
+            <li class="nav-item">
+                <?= $this->Html->link('<i class="ti-control-record"></i>Payroll Infos', ['controller'=>'payrollinfos', 'action'=>'index'], ['escape'=>false, 'class'=>'nav-link']) ?>
+            </li>
+        </ul>
+    </li>
+
+    <li>
         <a href="javascript: void(0);"><i data-feather="sunrise" class="align-self-center menu-icon"></i><span>Leaves</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
         <ul class="nav-second-level" aria-expanded="false">
             <li class="nav-item">

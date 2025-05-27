@@ -8,7 +8,7 @@ use App\Controller\GeneralController;
 
 ?>
 <!-- Start:: row-1 -->
-<div class="row mt-3">
+<!--div class="row mt-3">
     <div class="col-xxl-3 col-xl-6">
         <div class="card custom-card overflow-hidden">
             <div class="m-3 bg-light rounded-1 border">
@@ -69,11 +69,11 @@ use App\Controller\GeneralController;
             </div>
         </div>
     </div>
-</div>
+</div-->
 <!-- End:: row-1 -->
 
 <!-- Start:: row-3 -->
-<div class="row">
+<div class="row mt-3">
     <div class="col-xxl-12">
         <div class="card custom-card overflow-hidden">
             <div class="card-header justify-content-between">

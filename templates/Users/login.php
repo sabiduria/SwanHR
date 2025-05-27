@@ -54,7 +54,7 @@
                                     </div>
                                 </div><!--end card-body-->
                                 <div class="card-body bg-light-alt text-center">
-                                    <span class="text-muted d-none d-sm-inline-block">Solutic Tech © <script>
+                                    <span class="text-muted d-none d-sm-inline-block">SabiantArt Corporate © <script>
                                         document.write(new Date().getFullYear())
                                     </script></span>
                                 </div>

@@ -87,14 +87,26 @@ class PayslipsTable extends Table
             ->allowEmptyString('primes');
 
         $validator
+            ->numeric('salary')
+            ->allowEmptyString('salary');
+
+        $validator
             ->scalar('bank')
             ->maxLength('bank', 45)
             ->allowEmptyString('bank');
 
         $validator
-            ->scalar('banck_account')
-            ->maxLength('banck_account', 45)
-            ->allowEmptyString('banck_account');
+            ->scalar('bank_account')
+            ->maxLength('bank_account', 45)
+            ->allowEmptyString('bank_account');
+
+        $validator
+            ->boolean('published')
+            ->allowEmptyString('published');
+
+        $validator
+            ->boolean('payed')
+            ->allowEmptyString('payed');
 
         $validator
             ->scalar('createdby')

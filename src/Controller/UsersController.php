@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
+
 /**
  * Users Controller
  *
@@ -166,5 +168,21 @@ class UsersController extends AppController
 
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
+    }
+
+    public static function getUserNameOf($id): ?string
+    {
+        $table = TableRegistry::getTableLocator()->get('Users');
+
+        $user = $table->find()
+            ->select([
+                'name' => $table->query()->newExpr()->add([
+                    'CONCAT(firstname, " ", secondname , " ", lastname)'
+                ])
+            ])
+            ->where(['id' => $id])
+            ->first();
+
+        return $user ? $user->name : null;
     }
 }
